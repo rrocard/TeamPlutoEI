@@ -41,7 +41,7 @@ import numpy as np
 
 # Local imports
 
-import my_line_library as mll
+from vanishing import my_line_library as mll
 
 
 class VPNode(Node):
@@ -88,8 +88,6 @@ class VPNode(Node):
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             lines = self.lsd.detect(gray)[0]
             lines = mll.from_lsd(lines)
-
-
 
 
             if self.horizontal_displacement.get_subscription_count() > 0 or self.angle_ratio.get_subscription_count() > 0 :
