@@ -59,8 +59,9 @@ class VPNode(Node):
         #TODO: Define here your additional publishers
         # The publishers must always be defined before the subscribers
         # using them
+
         self.img_sub = self.create_subscription(
-            CompressedImage, "camera", self.on_image, 1
+            CompressedImage, "/bebop/camera/image_raw/compressed", self.on_image, 1
         )
         self.bridge = CvBridge()
 
@@ -133,9 +134,7 @@ class VPNode(Node):
             self.debug_pub.publish(outmsg)
 
         
-
-
-
+    
 
 
 def main(args=None):

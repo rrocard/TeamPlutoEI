@@ -1,0 +1,13 @@
+<launch>
+	<!-- Joy teleop -->
+	<node pkg="joy" exec="joy_node" name="joy"/>
+	<node pkg="vanishing_turtlebot" exec="joy_teleop" name="teleop">
+		<remap from="cmd_vel" to="joy_vel"/>
+    </node>
+
+    <!-- Twist mux -->
+    <node pkg="twist_mux" exec="twist_mux" name="twist_mux">
+        <remap from="/cmd_vel_out" to="/commands/velocity"/>
+        <param from="$(find-pkg-share vanishing_turtlebot)/config/mux.yaml"/>
+    </node>
+</launch>
