@@ -16,4 +16,6 @@
 
     <node pkg="rqt_gui" exec="rqt_gui" name="gui" args="--perspective-file $(find-pkg-share vanishing_turtlebot)/config/gui.perspective"/>
 
+    </node>
+
 </launch>
