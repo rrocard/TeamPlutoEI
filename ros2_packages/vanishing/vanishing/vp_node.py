@@ -93,13 +93,13 @@ class VPNode(Node):
 
         #if self.horizontal_displacement.get_subscription_count() > 0 or self.angle_ratio.get_subscription_count() > 0 :
                 
-        mll.length_filtering(lines) #On utilise les arguments par défaut des fonctions 
+        lines=mll.length_filtering(lines) #On utilise les arguments par défaut des fonctions 
 
         #On affiche les lignes à filtrer
 
-        mll.ceiling_filtering(lines) 
-        mll.angle_filtering(lines)
-        mll.cluster_filtering(lines)
+        lines=mll.ceiling_filtering(lines) 
+        lines=mll.angle_filtering(lines)
+        lines=mll.cluster_filtering(lines)
 
         #On affiche les lines gardées après filtrage
         mll.draw_lines(frame, lines, (50, 255, 255), 1)
@@ -107,7 +107,7 @@ class VPNode(Node):
 
         vanishing_point=mll.vanishing_point(lines)
 
-        cv2.circle(frame, (int(vanishing_point[0]),int(vanishing_point[1])), 10, (0,0,255),-1)
+        cv2.circle(frame, (int(vanishing_point[0]),int(vanishing_point[1])), 5, (0,0,255),-1)
 
         width=frame.shape[1]
         height=frame.shape[0]

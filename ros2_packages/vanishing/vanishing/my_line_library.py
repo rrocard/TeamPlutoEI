@@ -112,7 +112,7 @@ def intersections(segments):
                                       coeff * np.cross(sj[[4, 6]], si[[4, 6]])]) # -[a1, c1] ^ [a2, c2]
     return np.array(intersections)
 
-def vanishing_point(segments,xlim=10,ylim=20,height=640,width=480):
+def vanishing_point(segments,xlim=40,ylim=120,height=640,width=480):
 
     intersect=intersections(segments)
     
@@ -172,6 +172,8 @@ from sklearn.cluster import DBSCAN
 
 def cluster_filtering(segments,eps=0.1):
 
+    #print("segments base",segments)
+
     #If there is not much lines, no need for the algorithm
     if len(segments)<=2:
         return segments
@@ -196,14 +198,14 @@ def cluster_filtering(segments,eps=0.1):
 
     # print("cluster", cluster)
 
-    new_segments=np.array([])
+    new_segments=[]
 
     #On définit un dictionnaire avec pour clé un label de cluster 
     #et en value les indices des cores du cluster correspondants
 
     #Je voyais pas comment réduire le nombre de if ici
     d={}
-    
+    #Dictionnaire avec les indices des droites de même cluster
     for i in range (n):
         key=cluster[i]
         if key != -1:
@@ -214,7 +216,7 @@ def cluster_filtering(segments,eps=0.1):
                     d[key]=[i]
         else :
             #Lines that aren't in a cluster are taken into account
-            new_segments=np.append(new_segments,segments[i])
+            new_segments.append(segments[i])
     
     # print("intermediate seg", new_segments, "dict", d)
 
@@ -241,12 +243,15 @@ def cluster_filtering(segments,eps=0.1):
         new_segment=[x1,x2,y1,y2,a,b,c,L]
 
         #print("new_seg",new_segment)
-        new_segments=np.append(new_segments,new_segment) 
+        new_segments.append(new_segment) 
 
-    l=len(new_segments)
+    #l=len(new_segments)
     #Le reshape est nécessaire car sinon on a un vecteur renvoyé non une matrice à cause des appends
-    segments=new_segments.reshape(l//m,m)
+    #segments=new_segments.reshape(l//m,m)
 
+    new_segments = np.array(new_segments, dtype=np.float32)
+
+    return new_segments
     #Ce filtre fait qu'on a moins souvent le vanishing point, mais il est plus précis et stable
 
 import random as rd
@@ -270,6 +275,7 @@ def segment_on_line(a,b,c,width=640,height=480):
 def length_filtering(segments,min_length=69):
 
     segments = segments[segments[...,7] > min_length]
+    return segments
 
 def angle_filtering(segments,upper_angle=80,lower_angle=10):
 
@@ -278,9 +284,11 @@ def angle_filtering(segments,upper_angle=80,lower_angle=10):
     filter = np.abs(np.arccos(np.abs(scal)))*180/np.pi
     boolfilter = (filter > lower_angle) & (filter < upper_angle)
     segments = segments[boolfilter]
+    return segments
 
 def ceiling_filtering(segments,ceiling=80):
 
     segments = segments[np.logical_and(segments[..., 1] > ceiling, segments[..., 3] > ceiling)]
+    return segments
 
 
