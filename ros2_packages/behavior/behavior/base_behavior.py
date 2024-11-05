@@ -18,7 +18,7 @@ class BaseBehavior(Node):
 
         self.status_publisher = self.create_publisher(
             BehaviorStatus,
-            'behavior_status',
+            'behaviors_status',
             10
         )
 
