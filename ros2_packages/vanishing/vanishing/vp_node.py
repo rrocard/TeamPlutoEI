@@ -133,7 +133,7 @@ class VPNode(Node):
         else :
             ratio=0 #default value
         
-        normalized_ratio=(ratio/180 - 0.5)*180/np.pi
+        normalized_ratio=(ratio - 0.5)*180/np.pi
 
         print("ratio",ratio)
         print("normalized ratio", normalized_ratio)
@@ -146,10 +146,6 @@ class VPNode(Node):
         self.angle_ratio.publish(msg_ratio)
 
         outmsg = self.bridge.cv2_to_compressed_imgmsg(frame.copy())
-
-        if not outmsg:
-            print("No image")
-            print("Frame",frame)
 
         self.debug_pub.publish(outmsg)
 
