@@ -96,6 +96,7 @@ class VPNode(Node):
         lines=mll.length_filtering(lines) #On utilise les arguments par défaut des fonctions 
 
         #On affiche les lignes à filtrer
+        mll.draw_lines(frame, lines, (0, 0, 255), 1)
 
         lines=mll.ceiling_filtering(lines) 
         lines=mll.angle_filtering(lines)
@@ -105,21 +106,23 @@ class VPNode(Node):
         mll.draw_lines(frame, lines, (50, 255, 255), 1)
 
 
-        vanishing_point=mll.vanishing_point(lines)
+        vanishing_point=mll.vanishing_point(img,lines)
 
         cv2.circle(frame, (int(vanishing_point[0]),int(vanishing_point[1])), 5, (0,0,255),-1)
 
         width=frame.shape[1]
         height=frame.shape[0]
+        
 
         horizontal_displacement=vanishing_point[0]-width//2
-        normalized_horizontal_displacement=horizontal_displacement/640*0.5
+        normalized_horizontal_displacement=horizontal_displacement/width*0.5
 
         msg_horizontal=Float32()
         msg_horizontal.data=float(normalized_horizontal_displacement)
 
         self.horizontal_displacement.publish(msg_horizontal)
 
+        #We take the first two lines as first approximation
         angle_lines=lines[:2]
 
         ab = lines[..., 4]/lines[...,5]
@@ -128,9 +131,12 @@ class VPNode(Node):
         if len(angle)>1:
             ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
         else :
-            ratio=0
+            ratio=0 #default value
         
         normalized_ratio=(ratio/180 - 0.5)*180/np.pi
+        
+        print("ratio",ratio)
+        print("normalized ratio", normalized_ratio)
 
         msg_ratio=Float32()
         msg_ratio.data=float(normalized_ratio)
@@ -140,7 +146,11 @@ class VPNode(Node):
         self.angle_ratio.publish(msg_ratio)
 
         outmsg = self.bridge.cv2_to_compressed_imgmsg(frame.copy())
-        print(outmsg)
+
+        if not outmsg:
+            print("No image")
+            print("Frame",frame)
+
         self.debug_pub.publish(outmsg)
 
 

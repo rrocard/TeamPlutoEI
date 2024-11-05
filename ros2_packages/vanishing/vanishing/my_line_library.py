@@ -112,7 +112,10 @@ def intersections(segments):
                                       coeff * np.cross(sj[[4, 6]], si[[4, 6]])]) # -[a1, c1] ^ [a2, c2]
     return np.array(intersections)
 
-def vanishing_point(segments,xlim=40,ylim=120,height=640,width=480):
+def vanishing_point(img,segments,xlim=40,ylim=120):
+
+    width=img.shape[1]
+    height=img.shape[0]
 
     intersect=intersections(segments)
     
@@ -170,7 +173,7 @@ def vanishing_point(segments,xlim=40,ylim=120,height=640,width=480):
 
 from sklearn.cluster import DBSCAN
 
-def cluster_filtering(segments,eps=0.1):
+def cluster_filtering(img,segments,eps=0.1):
 
     #print("segments base",segments)
 
@@ -235,7 +238,7 @@ def cluster_filtering(segments,eps=0.1):
         #print("abc",a,b,c)
 
         #On trouve un segment de la droite qui rentre sur la fenêtre
-        x1,y1,x2,y2=segment_on_line(a,b,c)
+        x1,y1,x2,y2=segment_on_line(img,a,b,c)
 
         L=((x1-x2)**2+(y2-y1)**2)**(1/2)
         
@@ -256,11 +259,14 @@ def cluster_filtering(segments,eps=0.1):
 
 import random as rd
 
-def segment_on_line(a,b,c,width=640,height=480):
+def segment_on_line(img,a,b,c):
 
     #crée un segment appartenant à une droite de paramètres a,b,c
 
     assert b!=0
+    width=img.shape[1]
+    height=img.shape[0]
+
     segment=[]
 
     while len(segment)<4:
@@ -272,7 +278,7 @@ def segment_on_line(a,b,c,width=640,height=480):
 
     return segment[0],segment[1],segment[2],segment[3]
 
-def length_filtering(segments,min_length=69):
+def length_filtering(segments,min_length=90):
 
     segments = segments[segments[...,7] > min_length]
     return segments
@@ -286,7 +292,7 @@ def angle_filtering(segments,upper_angle=80,lower_angle=10):
     segments = segments[boolfilter]
     return segments
 
-def ceiling_filtering(segments,ceiling=80):
+def ceiling_filtering(segments,ceiling=160):
 
     segments = segments[np.logical_and(segments[..., 1] > ceiling, segments[..., 3] > ceiling)]
     return segments
