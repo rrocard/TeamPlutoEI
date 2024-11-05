@@ -100,13 +100,13 @@ class VPNode(Node):
 
         lines=mll.ceiling_filtering(lines) 
         lines=mll.angle_filtering(lines)
-        lines=mll.cluster_filtering(lines)
+        lines=mll.cluster_filtering(frame,lines)
 
         #On affiche les lines gardées après filtrage
         mll.draw_lines(frame, lines, (50, 255, 255), 1)
 
 
-        vanishing_point=mll.vanishing_point(img,lines)
+        vanishing_point=mll.vanishing_point(frame,lines)
 
         cv2.circle(frame, (int(vanishing_point[0]),int(vanishing_point[1])), 5, (0,0,255),-1)
 
@@ -134,7 +134,7 @@ class VPNode(Node):
             ratio=0 #default value
         
         normalized_ratio=(ratio/180 - 0.5)*180/np.pi
-        
+
         print("ratio",ratio)
         print("normalized ratio", normalized_ratio)
 
