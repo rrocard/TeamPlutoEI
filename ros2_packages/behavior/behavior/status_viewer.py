@@ -13,8 +13,6 @@ class Node(rclpy.node.Node):
     def __init__(self):
         super().__init__('status_viewer')
 
-
-<< << << < HEAD
         self.sub_behaviors_status = self.create_subscription(
             BehaviorStatus, 'behaviors_status', self._on_behaviors_status, 10)
         self.pub_ping = self.create_publisher(BehaviorStatus, 'behavior', 10)
@@ -23,8 +21,6 @@ class Node(rclpy.node.Node):
         self.create_timer(0.05, callback=self._on_evt_loop)
         self.create_timer(4.0, callback=self._on_last_seen)
 
-
->>>>>> >
         self.ping = BehaviorStatus()
         self.ping.name = 'ping'
 
