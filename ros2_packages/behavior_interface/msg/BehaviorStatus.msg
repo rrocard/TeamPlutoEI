@@ -1,2 +1,2 @@
-string testnullbehavior
-bool boolbehavior #(statut du behavior (true pour actif, false pour inactif)
+string name
+bool status #(statut du behavior (true pour actif, false pour inactif)

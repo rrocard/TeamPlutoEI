@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 package_name = 'behavior'
 
 node_scripts = ['fake_behavior_a = behavior.base_behavior:fake_behavior_a',
-            'fake_behavior_b = behavior.base_behavior:fake_behavior_b']
+            'fake_behavior_b = behavior.base_behavior:fake_behavior_b', 'status_viewer = behavior.status_viewer:main']
 
 setup(
     name=package_name,
