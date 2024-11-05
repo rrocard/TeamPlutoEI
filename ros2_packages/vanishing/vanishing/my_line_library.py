@@ -269,7 +269,7 @@ def segment_on_line(a,b,c,width=640,height=480):
 
 def length_filtering(segments,min_length=69):
 
-    segments = segments[segements[...,7] > min_length]
+    segments = segments[segments[...,7] > min_length]
 
 def angle_filtering(segments,upper_angle=80,lower_angle=10):
 

@@ -45,6 +45,7 @@ from vanishing import my_line_library as mll
 
 
 class VPNode(Node):
+
     def __init__(self):
         super().__init__("vp_node")
 
@@ -83,56 +84,60 @@ class VPNode(Node):
             f"Receiving video frame {frame.shape}, of type : {type(frame)}"
         )
 
-        if self.debug_pub.get_subscription_count() > 0:
+        #if self.debug_pub.get_subscription_count() > 0:
 
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            lines = self.lsd.detect(gray)[0]
-            lines = mll.from_lsd(lines)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        lines = cv2.createLineSegmentDetector(0).detect(gray)[0]
+        lines = mll.from_lsd(lines)
 
 
-            if self.horizontal_displacement.get_subscription_count() > 0 or self.angle_ratio.get_subscription_count() > 0 :
+        #if self.horizontal_displacement.get_subscription_count() > 0 or self.angle_ratio.get_subscription_count() > 0 :
                 
-                mll.length_filtering(lines) #On utilise les arguments par défaut des fonctions 
+        mll.length_filtering(lines) #On utilise les arguments par défaut des fonctions 
 
-                #On affiche les lignes à filtrer
+        #On affiche les lignes à filtrer
 
-                mll.draw_lines(frame, lines, (20, 100, 100), 1)
-                mll.ceiling_filtering(lines) 
-                mll.angle_filtering(lines)
-                mll.cluster_filtering(lines)
+        mll.ceiling_filtering(lines) 
+        mll.angle_filtering(lines)
+        mll.cluster_filtering(lines)
 
-                #On affiche les lines gardées après filtrage
-                mll.draw_lines(frame, lines, (50, 255, 255), 1)
+        #On affiche les lines gardées après filtrage
+        mll.draw_lines(frame, lines, (50, 255, 255), 1)
 
-                vanishing_point=mll.vanishing_point(lines)
 
-                cv2.circle(frame, (int(vanishingpoint[0]),int(vanishingpoint[1])), 10, (0,0,255),-1)
+        vanishing_point=mll.vanishing_point(lines)
 
-                width=frame.shape[1]
-                height=frame.shape[0]
-        
-                horizontal_displacement=vanishing_point[0]-width//2
-                normalized_horizontal_displacement=horizontal_displacement/640*0.5
+        cv2.circle(frame, (int(vanishing_point[0]),int(vanishing_point[1])), 10, (0,0,255),-1)
 
-                self.horizontal_displacement.publish(normalized_horizontal_displacement)
+        width=frame.shape[1]
+        height=frame.shape[0]
 
-                angle_lines=lines[:2]
+        horizontal_displacement=vanishing_point[0]-width//2
+        normalized_horizontal_displacement=horizontal_displacement/640*0.5
 
-                ab = line[..., 4]/line[...,5]
-                angle=np.arctan(ab)
+        msg_horizontal=Float32()
+        msg_horizontal.data=float(normalized_horizontal_displacement)
 
-                print("angle", angle)
+        self.horizontal_displacement.publish(msg_horizontal)
 
-                ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
-                normalized_ratio=(ratio/180 - 0.5)*180/np.pi
+        angle_lines=lines[:2]
 
-                self.angle_ratio.publish(normalized_ratio)
+        ab = lines[..., 4]/lines[...,5]
+        angle=np.arctan(ab)
 
-            outmsg = self.bridge.cv2_to_compressed_imgmsg(frame.copy())
-            self.debug_pub.publish(outmsg)
+        ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
+        normalized_ratio=(ratio/180 - 0.5)*180/np.pi
 
-        
-    
+        msg_ratio=Float32()
+        msg_ratio.data=float(normalized_ratio)
+
+        #print("msg_ratio",msg_ratio.data)
+
+        self.angle_ratio.publish(msg_ratio)
+
+        outmsg = self.bridge.cv2_to_compressed_imgmsg(frame.copy())
+        print(outmsg)
+        self.debug_pub.publish(outmsg)
 
 
 def main(args=None):
