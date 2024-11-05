@@ -125,7 +125,11 @@ class VPNode(Node):
         ab = lines[..., 4]/lines[...,5]
         angle=np.arctan(ab)
 
-        ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
+        if len(angle)>1:
+            ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
+        else :
+            ratio=0
+        
         normalized_ratio=(ratio/180 - 0.5)*180/np.pi
 
         msg_ratio=Float32()
