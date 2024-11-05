@@ -3,6 +3,7 @@ import threading
 from rclpy.node import Node
 from behavior_interface.msg import BehaviorStatus
 
+
 class BaseBehavior(Node):
     def __init__(self, behavior_name: str):
         super().__init__('base_behavior')
@@ -21,9 +22,12 @@ class BaseBehavior(Node):
             self.on_status(self.active)
 
     def on_status(self, status: bool):
-        self.get_logger().info(f'Behavior "{self.behavior_name}" status changed to: {"active" if status else "inactive"}')
+        self.get_logger().info(
+            f'Behavior "{self.behavior_name}" status changed to: {"active" if status else "inactive"}')
 
 # Definit fake behaviors comme sous-classes de BaseBehavior
+
+
 class FakeBehaviorA(BaseBehavior):
     def __init__(self):
         super().__init__("FakeBehaviorA")
@@ -34,6 +38,7 @@ class FakeBehaviorA(BaseBehavior):
             self.get_logger().info("FakeBehaviorA is now active and doing its task.")
         else:
             self.get_logger().info("FakeBehaviorA is now inactive.")
+
 
 class FakeBehaviorB(BaseBehavior):
     def __init__(self):
@@ -65,8 +70,3 @@ def fake_behavior_b():
     rclpy.spin(fake_behavior_b)
     fake_behavior_b.destroy_node()
     rclpy.shutdown()
-
-
-# pour s'assurer que main soit appelée directement
-if __name__ == "__main__":
-    main()
