@@ -24,7 +24,7 @@ class Node(rclpy.node.Node):
         self.create_timer(4.0, callback=self._on_last_seen)
 
 
->>>>>> > 8bfbcab431e6028429dac3d41c106d422eb2a7d6
+>>>>>> >
         self.ping = BehaviorStatus()
         self.ping.name = 'ping'
 
