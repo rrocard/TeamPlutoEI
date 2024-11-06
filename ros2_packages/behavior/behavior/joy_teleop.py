@@ -42,9 +42,9 @@ class Node(rclpy.node.Node):
 
         self.get_logger().info("Joystick Teleop Node initialized")
 
-        # Initialise l'état du bouton RB (deadman + trigger du décollage) et l'état de hover
+        # Initialise l'état du bouton RB (deadman + trigger du décollage) 
         self.deadman_pressed = False
-        self.hover_before_land = False
+       
 
     def joy_callback(self, msg):
         command_msg = Command()
@@ -52,40 +52,15 @@ class Node(rclpy.node.Node):
         # le bouton n'était pas enfoncé et on l'enfonce
         if msg.buttons[BUTTON_RB] == 1 and not self.deadman_pressed:
             command_msg.command = "takeoff"
-            self.deadman_pressed = True
-            self.hover_before_land = False  # réinitialise l'état de hover
             self.get_logger().info("RB pressed: Takeoff initiated")
+            self.deadman_pressed = True
 
         elif msg.buttons[BUTTON_RB] == 0 and self.deadman_pressed:
-            command_msg.command = "hover"
-            self.command_publisher.publish(command_msg)
-            self.get_logger().info("Hovering to stabilize before landing")
-
-            # hover_before_land passe à True, donc l'atterrissage est appelé au prochain passage
-            self.hover_before_land = True
-            self.deadman_active = False
-
-        elif self.hover_before_land:
-            # une fois que hover effectif
             command_msg.command = "land"
             self.command_publisher.publish(command_msg)
-            self.get_logger().info("Landing initiated")
-            self.hover_before_land = False    # reset
+            self.get_logger().info("RB released: Landing initiated")
+            self.deadman_pressed = False
 
-        # Ne publie de cmd de mvt que si le deadman est enfoncé (man not dead)
-        elif self.deadman_pressed:
-            if msg.axes[AXIS_LEFT_VERTICAL] > 0.5:
-                command_msg.command = "move_forward"
-            elif msg.axes[AXIS_LEFT_VERTICAL] < -0.5:
-                command_msg.command = "move_backward"
-            elif msg.axes[AXIS_LEFT_HORIZONTAL] > 0.5:
-                command_msg.command = "move_right"
-            elif msg.axes[AXIS_LEFT_HORIZONTAL] < -0.5:
-                command_msg.command = "move_left"
-            elif msg.buttons[BUTTON_A] == 1:
-                command_msg.command = "hover"
-            elif msg.buttons[BUTTON_Y] == 1:
-                command_msg.command = "emergency_stop"
 
         # Ne publie que si une commande est envoyée
         if command_msg.command:
@@ -96,7 +71,6 @@ class Node(rclpy.node.Node):
 def main(args=None):
     rclpy.init(args=args)
     teleop = Node('teleop')
-
     rclpy.spin(teleop)
     teleop.destroy_node()
     rclpy.shutdown()
