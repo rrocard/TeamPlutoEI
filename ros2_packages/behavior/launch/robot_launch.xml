@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="behavior" exec="takeoff" name="takeoff" />
+  <node pkg="behavior" exec="landing" name="landing" />
+  <node pkg="behavior" exec="joy_teleop" name="joy_teleop" />
+  <node pkg="behavior" exec="command" name="command" />
+  <node pkg="behavior" exec="status_viewer" name="status_viewer" />
+  <node pkg="joy" exec="joy_node" name="joy_node" />
+</launch>
+
