@@ -44,6 +44,7 @@ class Node(rclpy.node.Node):
 
         # Initialise l'état du bouton RB (deadman + trigger du décollage) 
         self.deadman_pressed = False
+        self.hover_pressed = False
        
 
     def joy_callback(self, msg):
@@ -51,21 +52,47 @@ class Node(rclpy.node.Node):
 
         # le bouton n'était pas enfoncé et on l'enfonce
         if msg.buttons[BUTTON_RB] == 1 and not self.deadman_pressed:
-            command_msg.command = "Takeoff"
+            command_msg.command = "TakeOff"
             self.command_publisher.publish(command_msg)
             self.get_logger().info("RB pressed: Takeoff initiated")
             self.deadman_pressed = True
 
         elif msg.buttons[BUTTON_RB] == 0 and self.deadman_pressed:
-            command_msg.command = "Landing"
+            command_msg.command = "Land"
             self.command_publisher.publish(command_msg)
             self.get_logger().info("RB released: Landing initiated")
             self.deadman_pressed = False
-        
-        elif msg.buttons[BUTTON_LOGITECH] == 1:
-            command_msg.command = "Wtf"
+            self.hover_pressed = False
+       
+
+        # Ne publie de cmd de mvt que si le deadman est enfoncé (man not dead)
+        elif self.deadman_pressed:
+            if msg.buttons[BUTTON_LB] == 1 and not self.hover_pressed:
+                command_msg.command = "Hover"
+                self.command_publisher.publish(command_msg)
+                self.get_logger().info("RB released: Landing initiated")
+                self.hover_pressed = True
+            # elif msg.axes[AXIS_LEFT_VERTICAL] > 0.5:
+            #     command_msg.command = "MoveForward"
+            # elif msg.axes[AXIS_LEFT_VERTICAL] < -0.5:
+            #     command_msg.command = "MoveBackward"
+            # elif msg.axes[AXIS_LEFT_HORIZONTAL] > 0.5:
+            #     command_msg.command = "MoveRight"
+            # elif msg.axes[AXIS_LEFT_HORIZONTAL] < -0.5:
+            #     command_msg.command = "MoveLeft"
+            
+            # elif msg.buttons[BUTTON_Y] == 1:
+            #     command_msg.command = "EmergencyStop"
+
+        # Ne publie que si une commande est envoyée
+        if command_msg.command:
             self.command_publisher.publish(command_msg)
-            self.get_logger().info("Zoumba triggered: Hula Hoop initiated")
+            self.get_logger().info(f"Published command: {command_msg.command}")
+
+        # elif msg.buttons[BUTTON_LOGITECH] == 1:
+        #     command_msg.command = "Wtf"
+        #     self.command_publisher.publish(command_msg)
+        #     self.get_logger().info("Zoumba triggered: Hula Hoop initiated")
     
         
 

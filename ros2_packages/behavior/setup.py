@@ -2,7 +2,8 @@ from setuptools import find_packages, setup
 
 package_name = 'behavior'
 
-node_scripts = ['takeoff = behavior.behaviors:takeoff', 'landing = behavior.behaviors:landing',
+node_scripts = ['takeoff = behavior.behaviors:takeoff', 'land = behavior.behaviors:land', 
+             'hover = behavior.behaviors:hover',
              'status_viewer = behavior.status_viewer:main',
              'joy_teleop = behavior.joy_teleop:main', 'command = behavior.command:main', ]
 
