@@ -12,8 +12,10 @@ launch/twist2piclaunch.py
 lower_level/__init__.py
 lower_level/joyteleop.py
 lower_level/pid.py
+lower_level/slide.py
 lower_level/speed_controller.py
 lower_level/twist2pic.py
+lower_level/u_turn.py
 resource/lower_level
 test/test_copyright.py
 test/test_flake8.py

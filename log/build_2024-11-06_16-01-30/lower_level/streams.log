@@ -1,0 +1,29 @@
+[1.002s] Invoking command in '/users/student/2022chojnackay/Bureau/EI/teamplutoei/src/lower_level': PYTHONPATH=/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/lower_level build --build-base /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build install --record /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log --single-version-externally-managed install_data
+[1.307s] running egg_info
+[1.310s] writing ../../build/lower_level/lower_level.egg-info/PKG-INFO
+[1.318s] writing dependency_links to ../../build/lower_level/lower_level.egg-info/dependency_links.txt
+[1.321s] writing entry points to ../../build/lower_level/lower_level.egg-info/entry_points.txt
+[1.326s] writing requirements to ../../build/lower_level/lower_level.egg-info/requires.txt
+[1.330s] writing top-level names to ../../build/lower_level/lower_level.egg-info/top_level.txt
+[1.339s] reading manifest file '../../build/lower_level/lower_level.egg-info/SOURCES.txt'
+[1.342s] writing manifest file '../../build/lower_level/lower_level.egg-info/SOURCES.txt'
+[1.347s] running build
+[1.348s] running build_py
+[1.350s] copying lower_level/slide.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.355s] copying lower_level/u_turn.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.361s] running install
+[1.362s] running install_lib
+[1.363s] copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/slide.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.370s] copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/u_turn.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.378s] byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/slide.py to slide.cpython-310.pyc
+[1.387s] byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/u_turn.py to u_turn.cpython-310.pyc
+[1.396s] running install_data
+[1.396s] running install_egg_info
+[1.398s] removing '/users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level-0.0.0-py3.10.egg-info' (and everything under it)
+[1.412s] Copying ../../build/lower_level/lower_level.egg-info to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level-0.0.0-py3.10.egg-info
+[1.472s] running install_scripts
+[1.493s] Installing joyteleop script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level
+[1.499s] Installing speed_controller script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level
+[1.505s] Installing twist2pic script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level
+[1.512s] writing list of installed files to '/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log'
+[1.543s] Invoked command in '/users/student/2022chojnackay/Bureau/EI/teamplutoei/src/lower_level' returned '0': PYTHONPATH=/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/lower_level build --build-base /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build install --record /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log --single-version-externally-managed install_data
