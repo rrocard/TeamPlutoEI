@@ -44,7 +44,7 @@ class SpeedController(Node):
         self.create_subscription(Bool, 'hover_mode_toggle', self.hover_mode_callback, 10)
 
         # Publisher for modified cmd_vel
-        self.cmd_vel_pub = self.create_publisher(Twist, 'cmd_vel', 10)
+        self.cmd_vel_pub = self.create_publisher(Twist, '/bebop/cmd_vel', 10)
 
     def linear_x_callback(self, msg):
         self.linear_x = msg.data
