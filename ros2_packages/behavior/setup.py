@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 package_name = 'behavior'
 
 node_scripts = ['fake_behavior_a = behavior.base_behavior:fake_behavior_a',
-            'fake_behavior_b = behavior.base_behavior:fake_behavior_b', 'status_viewer = behavior.status_viewer:main']
+            'fake_behavior_b = behavior.base_behavior:fake_behavior_b', 'status_viewer = behavior.status_viewer:main', 'joy_teleop = behavior.joy_teleop:main']
 
 setup(
     name=package_name,
@@ -17,7 +17,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='st5dronelab',
-    maintainer_email='emileandrieu@gmail.com',
+    maintainer_email='raphael.rocard@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
