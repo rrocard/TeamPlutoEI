@@ -300,7 +300,7 @@ def intensity_mesure(img,h):
     return gray_image[h]
 
 
-def local_shift(i1,i2,sigma=50,p=50):
+def local_shift(i1,i2,sigma=5,p=2):
 
     #We assume i1 and i2 are intensity curves
 
