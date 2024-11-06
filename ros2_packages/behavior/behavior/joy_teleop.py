@@ -62,11 +62,6 @@ class Node(rclpy.node.Node):
             self.deadman_pressed = False
 
 
-        # Ne publie que si une commande est envoyée
-        if command_msg.command:
-            self.command_publisher.publish(command_msg)
-            self.get_logger().info(f"Published command: {command_msg.command}")
-
 
 def main(args=None):
     rclpy.init(args=args)
