@@ -1,5 +1,4 @@
 import rclpy
-import threading
 from rclpy.node import Node
 from behavior_interface.msg import BehaviorStatus
 
@@ -23,7 +22,7 @@ class BaseBehavior(Node):
         )
 
     def status_callback(self, msg: BehaviorStatus):
-        self.get_logger().info(f'Behavior "{self.behavior_name}"')	
+        self.get_logger().info(f'Behavior "{self.behavior_name}"')
         if msg.name == self.behavior_name:
             self.active = msg.status
             self.on_status(self.active)
@@ -32,12 +31,12 @@ class BaseBehavior(Node):
             reponse.name = self.behavior_name
             reponse.status = self.active
             self.status_publisher.publish(reponse)
-            self.get_logger().info(f'Ping received. Sending status for "{self.behavior_name}": {"active" if self.active else "inactive"}')
-
+            self.get_logger().info(
+                f'Ping received. Sending status for "{self.behavior_name}": {"active" if self.active else "inactive"}')
 
     def on_status(self, status: bool):
-        self.get_logger().info(f'Behavior "{self.behavior_name}" status changed to: {"active" if status else "inactive"}')	
-
+        self.get_logger().info(
+            f'Behavior "{self.behavior_name}" status changed to: {"active" if status else "inactive"}')
 
 
 # Definit fake behaviors comme sous-classes de BaseBehavior
