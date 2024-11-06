@@ -122,17 +122,13 @@ class VPNode(Node):
 
         self.horizontal_displacement.publish(msg_horizontal)
 
-        #We take the first two lines as first approximation
-        angle_lines=lines[:2]
-
-        ab = lines[..., 4]/lines[...,5]
-        angle=np.arctan(ab)
-
-        if len(angle)>1:
-            ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
+        if len(lines)!=2:
+            ratio = 0
         else :
-            ratio=0 #default value
-        
+            tan = lines[..., 4]/lines[...,5]
+            angle=np.arctan(ab)
+            ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
+            
         normalized_ratio=(ratio - 0.5)*180/np.pi
 
         print("ratio",ratio)

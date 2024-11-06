@@ -48,6 +48,18 @@ def from_lsd(lines_lsd):
     # The length of the segment
     norm = np.sqrt(a**2 + b**2)
     return np.stack([x1, y1, x2, y2, a/norm, b/norm, c/norm, norm], axis=1)
+
+def draw_function(img,Y,hmin,hmax,ymin,ymax,color,thickness):
+
+    width=img.shape[1]
+    cv2.line(img,(0,ymin),(width,ymin),(255,0,255),2)    
+    cv2.line(img,(0,ymax),(width,ymax),(255,0,255),2)
+    
+    n=len(Y)
+    for i in range (n-1):
+        cv2.line(img,(i,Y[i]),(i+1,Y[i+1]),color,thickness)
+    
+
 def draw_segments(img, segments, color, thickness):
     '''
         img : cv2 image
@@ -120,26 +132,13 @@ def vanishing_point(img,segments,xlim=40,ylim=120):
     intersect=intersections(segments)
     
     #Pour le calcul du vanishing point : on prend la moyenne des intersections si il y en a plusieurs
-    #On applique aussi un filtre sur les intersections prises en compte
+    #On applique aussi au préalable un filtre sur les intersections prises en compte
 
     #Les intersections filtrées doivent se situer dans une rectangle défini par (xlim, width-xlim) et (ylim, height-ylim)
     #xlim et ylim étant réglable
 
-    #On a aussi envisagé : de prendre qu'en compte seulement des intersections proches l'un de l'autre 
-    #afin de d'éliminer des intersections parasites. 
-    #On aurait alors utilisé des méthodes de machine learning pour répérer les clusters de points
-
-    #On a aussi filtrer les courbes verticales et les courbes similaires.
-
-    #Pour les courbes similaires nous avons repéré les clusters (avec l'algo de DBSCAN)
-    #Puis remplacé un cluster de droites par la moyenne du cluster
-    #On ne pouvait pas simplement appliquer un mask comme pour les autres filtres malheureusement
-    #Car il fallait remplacer par une droite les clusters non les supprimés,
-    #Car on travail sur la norm entre chacune des droites
-
-    #Nous aurions pu aussi essayer de garder en mémoire l'historique du vanishing point
-    #et imposer une forme de continuité. On n'accepterait que des petits déplacements.
-    #le problème serait de définir ce "petit" et de parer au cas où dès le début le vanishing point est décalé
+    #Nous avons aussi repéré les clusters de lines (avec l'algo de DBSCAN)
+    #Puis remplacé un cluster de droites par la moyenne du cluster (voir fonction suivante)
 
     # print(f"intersect1: {intersect}")
 
@@ -165,8 +164,7 @@ def vanishing_point(img,segments,xlim=40,ylim=120):
         vanishingpoint=np.mean(intersect,axis=0)
 
         if len(intersect)!=0 :
-            #cv2.circle(img, (int(vanishingpoint[0]),int(vanishingpoint[1])), 10, (0,0,255),-1)
-            #pour montrer le vanishing point (la fonction a été modif pour ne plus avoir en argument l'image)
+            cv2.circle(img, (int(vanishingpoint[0]),int(vanishingpoint[1])), 8, (0,0,255),-1)
             return vanishingpoint
 
     return [width//2,height//2] #valeur par défaut du vanishing point
@@ -183,30 +181,26 @@ def cluster_filtering(img,segments,eps=0.1):
 
     copy=np.copy(segments)
     lines=copy[...,4:7]
-    lines[...,2]=lines[...,2]/10000 #Utiliser ça modif directement copy, d'ou le np.copy
-    #on réduit l'impact de l'ordonnée à l'origine pour l'ajuster à a et b
+    lines[...,2]=lines[...,2]/10000 
+    #Utiliser ça modif directement copy, d'ou le np.copy
+    #on réduit l'impact de l'ordonnée à l'origine pour l'ajuster à a et b d'où le facteur 10000
+
     n,m=np.shape(segments)
 
-    #We get the norm between each row in a matrix (I sadly could not find a way to vectorize this)
-    #We might not need this
-    # norm=np.zeros((n,n))
-    # for i in range(n):
-    #     for j in range(i,n):
-    #         norm[i,j]=np.linalg.norm(lines[i]-lines[j])
-    #         norm[j,i]=norm[i,j]
-    # print("norm", norm)
-
+    #On obtient les différents cluster de droites
+    #L'avantage de cette algo par rapport au k-means par exemple est de ne pas avoir à préciser le nombre
+    #de cluster, seulement une valeur epsilon et le min_samples :
+    #nombre minimal de lignes par cluster 
     dbscan = DBSCAN(eps, min_samples=2)
     cluster = dbscan.fit_predict(lines)
 
     # print("cluster", cluster)
 
+    #On va stocker les segments filtrés ici
     new_segments=[]
 
     #On définit un dictionnaire avec pour clé un label de cluster 
     #et en value les indices des cores du cluster correspondants
-
-    #Je voyais pas comment réduire le nombre de if ici
     d={}
     #Dictionnaire avec les indices des droites de même cluster
     for i in range (n):
@@ -237,7 +231,7 @@ def cluster_filtering(img,segments,eps=0.1):
 
         #print("abc",a,b,c)
 
-        #On trouve un segment de la droite qui rentre sur la fenêtre
+        #On trouve un segment qui se trouve sur la droite avec les paramètres de la droite
         x1,y1,x2,y2=segment_on_line(img,a,b,c)
 
         L=((x1-x2)**2+(y2-y1)**2)**(1/2)
@@ -248,14 +242,10 @@ def cluster_filtering(img,segments,eps=0.1):
         #print("new_seg",new_segment)
         new_segments.append(new_segment) 
 
-    #l=len(new_segments)
-    #Le reshape est nécessaire car sinon on a un vecteur renvoyé non une matrice à cause des appends
-    #segments=new_segments.reshape(l//m,m)
-
     new_segments = np.array(new_segments, dtype=np.float32)
 
     return new_segments
-    #Ce filtre fait qu'on a moins souvent le vanishing point, mais il est plus précis et stable
+    #Ce filtre fait qu'on a moins souvent le vanishing point, mais il est plus précis et stable.
 
 import random as rd
 
@@ -297,4 +287,46 @@ def ceiling_filtering(segments,ceiling=160):
     segments = segments[np.logical_and(segments[..., 1] > ceiling, segments[..., 3] > ceiling)]
     return segments
 
+def intensity_mesure(img,h):
 
+    #This function returns a mesure of intensity along a given line h on the image
+    #It returns a numpy array of dimension width=img.shape[1]
+
+    if len(img.shape)<3:
+        return img[h] #Grayscaled
+    
+
+    gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return gray_image[h]
+
+
+def local_shift(i1,i2,sigma=50,p=50):
+
+    #We assume i1 and i2 are intensity curves
+
+    n=len(i1)
+    shift=np.zeros(n)
+
+
+    # i1_expanded = i1.reshape(1, -1)  
+    # i2_expanded = i2.reshape(1, -1)
+
+    # h_range = np.arange(-p, p)
+    # s_range = np.arange(sigma) 
+
+
+    # diffs = np.array([[np.sum((i1_expanded[0, x + h_range] - i2_expanded[0, x + h_range - s])**2) for s in s_range] for x in range(n)])
+
+    # shift = np.argmin(squared_diff, axis=1)
+    
+    shiftbis=np.zeros(n)
+
+    #Déplacement vers la droite
+    for x in range (sigma+p,n-sigma-p):
+        shiftbis[x]=np.argmin([sum([(i1[x+h]-i2[x+h-s])**2 for h in range (-p,p)]) for s in range (0,sigma)])
+
+    # print("shiftbis",shiftbis)
+    # print(len(shiftbis),n)
+    shiftbis=shiftbis.astype(int)
+
+    return shiftbis
