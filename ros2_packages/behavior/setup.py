@@ -2,8 +2,9 @@ from setuptools import find_packages, setup
 
 package_name = 'behavior'
 
-node_scripts = ['fake_behavior_a = behavior.base_behavior:fake_behavior_a',
-            'fake_behavior_b = behavior.base_behavior:fake_behavior_b', 'status_viewer = behavior.status_viewer:main', 'joy_teleop = behavior.joy_teleop:main']
+node_scripts = ['takeoff = behavior.behaviors:takeoff', 'landing = behavior.behaviors:landing',
+             'status_viewer = behavior.status_viewer:main',
+             'joy_teleop = behavior.joy_teleop:main', 'command = behavior.command:main', ]
 
 setup(
     name=package_name,
@@ -13,6 +14,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/launch', ['launch/robot_launch.xml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

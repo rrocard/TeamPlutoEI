@@ -51,21 +51,29 @@ class Node(rclpy.node.Node):
 
         # le bouton n'était pas enfoncé et on l'enfonce
         if msg.buttons[BUTTON_RB] == 1 and not self.deadman_pressed:
-            command_msg.command = "takeoff"
+            command_msg.command = "Takeoff"
+            self.command_publisher.publish(command_msg)
             self.get_logger().info("RB pressed: Takeoff initiated")
             self.deadman_pressed = True
 
         elif msg.buttons[BUTTON_RB] == 0 and self.deadman_pressed:
-            command_msg.command = "land"
+            command_msg.command = "Landing"
             self.command_publisher.publish(command_msg)
             self.get_logger().info("RB released: Landing initiated")
             self.deadman_pressed = False
+        
+        elif msg.buttons[BUTTON_LOGITECH] == 1:
+            command_msg.command = "Wtf"
+            self.command_publisher.publish(command_msg)
+            self.get_logger().info("Zoumba triggered: Hula Hoop initiated")
+    
+        
 
 
 
 def main(args=None):
     rclpy.init(args=args)
-    teleop = Node('teleop')
-    rclpy.spin(teleop)
-    teleop.destroy_node()
+    joy_teleop = Node('joy_teleop')
+    rclpy.spin(joy_teleop)
+    joy_teleop.destroy_node()
     rclpy.shutdown()
