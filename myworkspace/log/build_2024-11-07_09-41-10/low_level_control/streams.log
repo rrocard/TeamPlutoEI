@@ -1,0 +1,22 @@
+[1.194s] Invoking command in '/home/mystudent/Documents/EiDrone/myworkspace/src/low_level_control': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/low_level_control build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/install.log --single-version-externally-managed install_data
+[1.487s] running egg_info
+[1.487s] writing ../../build/low_level_control/low_level_control.egg-info/PKG-INFO
+[1.488s] writing dependency_links to ../../build/low_level_control/low_level_control.egg-info/dependency_links.txt
+[1.488s] writing entry points to ../../build/low_level_control/low_level_control.egg-info/entry_points.txt
+[1.488s] writing requirements to ../../build/low_level_control/low_level_control.egg-info/requires.txt
+[1.488s] writing top-level names to ../../build/low_level_control/low_level_control.egg-info/top_level.txt
+[1.491s] reading manifest file '../../build/low_level_control/low_level_control.egg-info/SOURCES.txt'
+[1.492s] writing manifest file '../../build/low_level_control/low_level_control.egg-info/SOURCES.txt'
+[1.492s] running build
+[1.492s] running build_py
+[1.492s] running install
+[1.493s] running install_lib
+[1.494s] running install_data
+[1.494s] running install_egg_info
+[1.496s] removing '/home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control-0.0.0-py3.10.egg-info' (and everything under it)
+[1.496s] Copying ../../build/low_level_control/low_level_control.egg-info to /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control-0.0.0-py3.10.egg-info
+[1.497s] running install_scripts
+[1.518s] Installing pid script to /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/low_level_control
+[1.518s] Installing speed_controller script to /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/low_level_control
+[1.518s] writing list of installed files to '/home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/install.log'
+[1.552s] Invoked command in '/home/mystudent/Documents/EiDrone/myworkspace/src/low_level_control' returned '0': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/low_level_control build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/install.log --single-version-externally-managed install_data

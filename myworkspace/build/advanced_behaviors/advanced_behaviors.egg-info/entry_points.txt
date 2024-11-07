@@ -1,0 +1,4 @@
+[console_scripts]
+slide = advanced_behaviors.slide:main
+u_turn = advanced_behaviors.u_turn:main
+

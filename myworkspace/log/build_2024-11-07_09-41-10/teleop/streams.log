@@ -1,0 +1,37 @@
+[1.188s] Invoking command in '/home/mystudent/Documents/EiDrone/myworkspace/src/teleop': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/teleop build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/install.log --single-version-externally-managed install_data
+[1.469s] running egg_info
+[1.470s] creating ../../build/teleop/teleop.egg-info
+[1.471s] writing ../../build/teleop/teleop.egg-info/PKG-INFO
+[1.471s] writing dependency_links to ../../build/teleop/teleop.egg-info/dependency_links.txt
+[1.471s] writing entry points to ../../build/teleop/teleop.egg-info/entry_points.txt
+[1.471s] writing requirements to ../../build/teleop/teleop.egg-info/requires.txt
+[1.471s] writing top-level names to ../../build/teleop/teleop.egg-info/top_level.txt
+[1.472s] writing manifest file '../../build/teleop/teleop.egg-info/SOURCES.txt'
+[1.473s] reading manifest file '../../build/teleop/teleop.egg-info/SOURCES.txt'
+[1.474s] writing manifest file '../../build/teleop/teleop.egg-info/SOURCES.txt'
+[1.474s] running build
+[1.475s] running build_py
+[1.475s] creating /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build
+[1.475s] creating /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build/lib
+[1.475s] creating /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build/lib/teleop
+[1.475s] copying teleop/__init__.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build/lib/teleop
+[1.476s] copying teleop/joyteleop.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build/lib/teleop
+[1.476s] running install
+[1.476s] running install_lib
+[1.476s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop
+[1.476s] copying /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build/lib/teleop/__init__.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop
+[1.476s] copying /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build/lib/teleop/joyteleop.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop
+[1.477s] byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop/__init__.py to __init__.cpython-310.pyc
+[1.477s] byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop/joyteleop.py to joyteleop.cpython-310.pyc
+[1.478s] running install_data
+[1.478s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/share/ament_index
+[1.478s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/share/ament_index/resource_index
+[1.478s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/share/ament_index/resource_index/packages
+[1.478s] copying resource/teleop -> /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/share/ament_index/resource_index/packages
+[1.478s] copying package.xml -> /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/share/teleop
+[1.478s] running install_egg_info
+[1.480s] Copying ../../build/teleop/teleop.egg-info to /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop-0.0.0-py3.10.egg-info
+[1.480s] running install_scripts
+[1.500s] Installing joyteleop script to /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/teleop
+[1.500s] writing list of installed files to '/home/mystudent/Documents/EiDrone/myworkspace/build/teleop/install.log'
+[1.533s] Invoked command in '/home/mystudent/Documents/EiDrone/myworkspace/src/teleop' returned '0': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/teleop build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/install.log --single-version-externally-managed install_data

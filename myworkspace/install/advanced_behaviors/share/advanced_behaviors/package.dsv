@@ -1,0 +1,6 @@
+source;share/advanced_behaviors/hook/pythonpath.ps1
+source;share/advanced_behaviors/hook/pythonpath.dsv
+source;share/advanced_behaviors/hook/pythonpath.sh
+source;share/advanced_behaviors/hook/ament_prefix_path.ps1
+source;share/advanced_behaviors/hook/ament_prefix_path.dsv
+source;share/advanced_behaviors/hook/ament_prefix_path.sh

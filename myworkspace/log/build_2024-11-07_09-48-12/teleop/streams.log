@@ -1,0 +1,21 @@
+[1.535s] Invoking command in '/home/mystudent/Documents/EiDrone/myworkspace/src/teleop': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/teleop build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/install.log --single-version-externally-managed install_data
+[1.830s] running egg_info
+[1.831s] writing ../../build/teleop/teleop.egg-info/PKG-INFO
+[1.831s] writing dependency_links to ../../build/teleop/teleop.egg-info/dependency_links.txt
+[1.831s] writing entry points to ../../build/teleop/teleop.egg-info/entry_points.txt
+[1.831s] writing requirements to ../../build/teleop/teleop.egg-info/requires.txt
+[1.831s] writing top-level names to ../../build/teleop/teleop.egg-info/top_level.txt
+[1.834s] reading manifest file '../../build/teleop/teleop.egg-info/SOURCES.txt'
+[1.835s] writing manifest file '../../build/teleop/teleop.egg-info/SOURCES.txt'
+[1.836s] running build
+[1.836s] running build_py
+[1.836s] running install
+[1.836s] running install_lib
+[1.837s] running install_data
+[1.837s] running install_egg_info
+[1.839s] removing '/home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop-0.0.0-py3.10.egg-info' (and everything under it)
+[1.839s] Copying ../../build/teleop/teleop.egg-info to /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages/teleop-0.0.0-py3.10.egg-info
+[1.840s] running install_scripts
+[1.861s] Installing joyteleop script to /home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/teleop
+[1.861s] writing list of installed files to '/home/mystudent/Documents/EiDrone/myworkspace/build/teleop/install.log'
+[1.908s] Invoked command in '/home/mystudent/Documents/EiDrone/myworkspace/src/teleop' returned '0': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/teleop build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/teleop/install.log --single-version-externally-managed install_data

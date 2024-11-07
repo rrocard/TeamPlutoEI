@@ -1,0 +1,4 @@
+[console_scripts]
+pid = low_level_control.pid:main
+speed_controller = low_level_control.speed_controller:main
+

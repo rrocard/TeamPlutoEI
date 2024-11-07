@@ -1,0 +1,22 @@
+[1.677s] Invoking command in '/home/mystudent/Documents/EiDrone/myworkspace/src/advanced_behaviors': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/advanced_behaviors build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/install.log --single-version-externally-managed install_data
+[2.044s] running egg_info
+[2.045s] writing ../../build/advanced_behaviors/advanced_behaviors.egg-info/PKG-INFO
+[2.046s] writing dependency_links to ../../build/advanced_behaviors/advanced_behaviors.egg-info/dependency_links.txt
+[2.047s] writing entry points to ../../build/advanced_behaviors/advanced_behaviors.egg-info/entry_points.txt
+[2.047s] writing requirements to ../../build/advanced_behaviors/advanced_behaviors.egg-info/requires.txt
+[2.048s] writing top-level names to ../../build/advanced_behaviors/advanced_behaviors.egg-info/top_level.txt
+[2.052s] reading manifest file '../../build/advanced_behaviors/advanced_behaviors.egg-info/SOURCES.txt'
+[2.053s] writing manifest file '../../build/advanced_behaviors/advanced_behaviors.egg-info/SOURCES.txt'
+[2.053s] running build
+[2.053s] running build_py
+[2.054s] running install
+[2.054s] running install_lib
+[2.055s] running install_data
+[2.055s] running install_egg_info
+[2.060s] removing '/home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors-0.0.0-py3.10.egg-info' (and everything under it)
+[2.060s] Copying ../../build/advanced_behaviors/advanced_behaviors.egg-info to /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors-0.0.0-py3.10.egg-info
+[2.061s] running install_scripts
+[2.090s] Installing slide script to /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/advanced_behaviors
+[2.091s] Installing u_turn script to /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/advanced_behaviors
+[2.092s] writing list of installed files to '/home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/install.log'
+[2.143s] Invoked command in '/home/mystudent/Documents/EiDrone/myworkspace/src/advanced_behaviors' returned '0': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/advanced_behaviors build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/install.log --single-version-externally-managed install_data

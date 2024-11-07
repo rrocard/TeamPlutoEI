@@ -1,0 +1,39 @@
+running egg_info
+creating ../../build/low_level_control/low_level_control.egg-info
+writing ../../build/low_level_control/low_level_control.egg-info/PKG-INFO
+writing dependency_links to ../../build/low_level_control/low_level_control.egg-info/dependency_links.txt
+writing entry points to ../../build/low_level_control/low_level_control.egg-info/entry_points.txt
+writing requirements to ../../build/low_level_control/low_level_control.egg-info/requires.txt
+writing top-level names to ../../build/low_level_control/low_level_control.egg-info/top_level.txt
+writing manifest file '../../build/low_level_control/low_level_control.egg-info/SOURCES.txt'
+reading manifest file '../../build/low_level_control/low_level_control.egg-info/SOURCES.txt'
+writing manifest file '../../build/low_level_control/low_level_control.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build
+creating /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib
+creating /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib/low_level_control
+copying low_level_control/pid.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib/low_level_control
+copying low_level_control/__init__.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib/low_level_control
+copying low_level_control/speed_controller.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib/low_level_control
+running install
+running install_lib
+creating /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control
+copying /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib/low_level_control/pid.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control
+copying /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib/low_level_control/__init__.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control
+copying /home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/build/lib/low_level_control/speed_controller.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control
+byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control/pid.py to pid.cpython-310.pyc
+byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control/speed_controller.py to speed_controller.cpython-310.pyc
+running install_data
+creating /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/share/ament_index
+creating /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/share/ament_index/resource_index
+creating /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/share/ament_index/resource_index/packages
+copying resource/low_level_control -> /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/share/ament_index/resource_index/packages
+copying package.xml -> /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/share/low_level_control
+running install_egg_info
+Copying ../../build/low_level_control/low_level_control.egg-info to /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/python3.10/site-packages/low_level_control-0.0.0-py3.10.egg-info
+running install_scripts
+Installing pid script to /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/low_level_control
+Installing speed_controller script to /home/mystudent/Documents/EiDrone/myworkspace/install/low_level_control/lib/low_level_control
+writing list of installed files to '/home/mystudent/Documents/EiDrone/myworkspace/build/low_level_control/install.log'

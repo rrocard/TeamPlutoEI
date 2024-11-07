@@ -1,0 +1,41 @@
+[1.560s] Invoking command in '/home/mystudent/Documents/EiDrone/myworkspace/src/advanced_behaviors': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/advanced_behaviors build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/install.log --single-version-externally-managed install_data
+[1.854s] running egg_info
+[1.854s] creating ../../build/advanced_behaviors/advanced_behaviors.egg-info
+[1.855s] writing ../../build/advanced_behaviors/advanced_behaviors.egg-info/PKG-INFO
+[1.855s] writing dependency_links to ../../build/advanced_behaviors/advanced_behaviors.egg-info/dependency_links.txt
+[1.855s] writing entry points to ../../build/advanced_behaviors/advanced_behaviors.egg-info/entry_points.txt
+[1.855s] writing requirements to ../../build/advanced_behaviors/advanced_behaviors.egg-info/requires.txt
+[1.855s] writing top-level names to ../../build/advanced_behaviors/advanced_behaviors.egg-info/top_level.txt
+[1.857s] writing manifest file '../../build/advanced_behaviors/advanced_behaviors.egg-info/SOURCES.txt'
+[1.858s] reading manifest file '../../build/advanced_behaviors/advanced_behaviors.egg-info/SOURCES.txt'
+[1.859s] writing manifest file '../../build/advanced_behaviors/advanced_behaviors.egg-info/SOURCES.txt'
+[1.859s] running build
+[1.859s] running build_py
+[1.859s] creating /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build
+[1.860s] creating /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib
+[1.860s] creating /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib/advanced_behaviors
+[1.860s] copying advanced_behaviors/__init__.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib/advanced_behaviors
+[1.860s] copying advanced_behaviors/slide.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib/advanced_behaviors
+[1.860s] copying advanced_behaviors/u_turn.py -> /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib/advanced_behaviors
+[1.860s] running install
+[1.860s] running install_lib
+[1.861s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors
+[1.861s] copying /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib/advanced_behaviors/__init__.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors
+[1.861s] copying /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib/advanced_behaviors/slide.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors
+[1.861s] copying /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build/lib/advanced_behaviors/u_turn.py -> /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors
+[1.862s] byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors/__init__.py to __init__.cpython-310.pyc
+[1.862s] byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors/slide.py to slide.cpython-310.pyc
+[1.863s] byte-compiling /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors/u_turn.py to u_turn.cpython-310.pyc
+[1.863s] running install_data
+[1.864s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/share/ament_index
+[1.864s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/share/ament_index/resource_index
+[1.864s] creating /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/share/ament_index/resource_index/packages
+[1.864s] copying resource/advanced_behaviors -> /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/share/ament_index/resource_index/packages
+[1.864s] copying package.xml -> /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/share/advanced_behaviors
+[1.864s] running install_egg_info
+[1.866s] Copying ../../build/advanced_behaviors/advanced_behaviors.egg-info to /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages/advanced_behaviors-0.0.0-py3.10.egg-info
+[1.867s] running install_scripts
+[1.888s] Installing slide script to /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/advanced_behaviors
+[1.888s] Installing u_turn script to /home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/advanced_behaviors
+[1.888s] writing list of installed files to '/home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/install.log'
+[1.943s] Invoked command in '/home/mystudent/Documents/EiDrone/myworkspace/src/advanced_behaviors' returned '0': PYTHONPATH=/home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mystudent/Documents/EiDrone/myworkspace/install/advanced_behaviors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/advanced_behaviors build --build-base /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/build install --record /home/mystudent/Documents/EiDrone/myworkspace/build/advanced_behaviors/install.log --single-version-externally-managed install_data
