@@ -42,8 +42,7 @@ class Land(AutoOff):
 class Hover(AutoOff):
     def __init__(self):
         super().__init__("Hover")
-        self.hover_publisher = self.create_publisher(
-            Empty, '/hover_mode_toggle', 10)
+        self.hover_publisher = self.create_publisher(Empty, '/hover_mode_toggle', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -58,14 +57,15 @@ class Hover(AutoOff):
 class MoveForward(AutoOff):
     def __init__(self):
         super().__init__("MoveForward")
-        self.moveforward_publisher = self.create_publisher(
-            Empty, 'linear_x', 10)
+        self.moveforward_publisher = self.create_publisher(Float64, 'linear_x', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.moveforward_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = 0.3
+            self.moveforward_publisher.publish(vitesse)
             self.get_logger().info("MoveForward is now active and doing its task.")
         else:
             self.get_logger().info("MoveForward is now inactive.")
@@ -74,14 +74,15 @@ class MoveForward(AutoOff):
 class MoveBackward(AutoOff):
     def __init__(self):
         super().__init__("MoveBackward")
-        self.movebackward_publisher = self.create_publisher(
-            Empty, 'linear_x', 10)
+        self.movebackward_publisher = self.create_publisher(Float64, 'linear_x', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.movebackward_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = -0.3
+            self.movebackward_publisher.publish(vitesse)
             self.get_logger().info("MoveBackward is now active and doing its task.")
         else:
             self.get_logger().info("MoveBackward is now inactive.")
@@ -90,13 +91,15 @@ class MoveBackward(AutoOff):
 class MoveRight(AutoOff):
     def __init__(self):
         super().__init__("MoveRight")
-        self.moveright_publisher = self.create_publisher(Empty, 'linear_y', 10)
+        self.moveright_publisher = self.create_publisher(Float64, 'linear_y', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.moveright_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = 0.3
+            self.moveright_publisher.publish(vitesse)
             self.get_logger().info("MoveRight is now active and doing its task.")
         else:
             self.get_logger().info("MoveRight is now inactive.")
@@ -105,13 +108,15 @@ class MoveRight(AutoOff):
 class MoveLeft(AutoOff):
     def __init__(self):
         super().__init__("MoveLeft")
-        self.moveleft_publisher = self.create_publisher(Empty, 'linear_y', 10)
+        self.moveleft_publisher = self.create_publisher(Float64, 'linear_y', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.moveleft_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = -0.3
+            self.moveleft_publisher.publish(vitesse)
             self.get_logger().info("MoveLeft is now active and doing its task.")
         else:
             self.get_logger().info("MoveLeft is now inactive.")
@@ -120,13 +125,15 @@ class MoveLeft(AutoOff):
 class MoveUp(AutoOff):
     def __init__(self):
         super().__init__("MoveUp")
-        self.moveup_publisher = self.create_publisher(Empty, 'linear_z', 10)
+        self.moveup_publisher = self.create_publisher(Float64, 'linear_z', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.moveup_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = 0.3
+            self.moveup_publisher.publish(vitesse)
             self.get_logger().info("MoveUp is now active and doing its task.")
         else:
             self.get_logger().info("MoveUp is now inactive.")
@@ -135,13 +142,15 @@ class MoveUp(AutoOff):
 class MoveDown(AutoOff):
     def __init__(self):
         super().__init__("MoveDown")
-        self.movedown_publisher = self.create_publisher(Empty, 'linear_z', 10)
+        self.movedown_publisher = self.create_publisher(Float64, 'linear_z', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.movedown_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = -0.3
+            self.movedown_publisher.publish(vitesse)
             self.get_logger().info("MoveDown is now active and doing its task.")
         else:
             self.get_logger().info("MoveDown is now inactive.")
@@ -151,13 +160,15 @@ class TurnRight(AutoOff):
     def __init__(self):
         super().__init__("TurnRight")
         self.turnright_publisher = self.create_publisher(
-            Empty, 'angular_z', 10)
+            Float64, 'angular_z', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.turnright_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = 0.3
+            self.turnright_publisher.publish(vitesse)
             self.get_logger().info("TurnRight is now active and doing its task.")
         else:
             self.get_logger().info("TurnRight is now inactive.")
@@ -166,13 +177,15 @@ class TurnRight(AutoOff):
 class TurnLeft(AutoOff):
     def __init__(self):
         super().__init__("TurnLeft")
-        self.turnleft_publisher = self.create_publisher(Empty, 'angular_z', 10)
+        self.turnleft_publisher = self.create_publisher(Float64, 'angular_z', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.turnleft_publisher.publish(Empty())
+            vitesse = Float64()
+            vitesse.data = -0.3
+            self.turnleft_publisher.publish(vitesse)
             self.get_logger().info("TurnLeft is now active and doing its task.")
         else:
             self.get_logger().info("TurnLeft is now inactive.")
