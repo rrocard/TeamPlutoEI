@@ -18,15 +18,21 @@ class Node(rclpy.node.Node):
         )
 
         # liste des behaviors possibles
-        self.behaviors = ['Land', 'TakeOff', 'Hover', 'MoveForward', 'MoveBackward' 'MoveLeft', 'MoveUp', 'MoveRight', 'TurnLeft', 'TurnRight']
+        self.behaviors = ['Land', 'TakeOff', 'Hover', 'MoveForward', 'MoveBackward', 'MoveLeft', 'MoveUp', 'MoveRight', 'TurnLeft', 'TurnRight']
         self.commands = {
             'TakeOff' : [(0, 'TakeOff')],
             'Land' : [(0, 'Land')],
+            'EmergencyStop' : [(0, 'Hover'), (1, 'Land')],
             'Hover' : [(0, 'Hover')],
-            'LeftTurn' : [(0, 'Hover'), (2, 'TurnLeft'), (3.5, 'Hover'), (4, 'MoveForward') ],
-            'RightTurn' : [(0, 'Hover'), (2, 'TurnRight'), (3.5, 'Hover'), (4, 'MoveForward') ],
-            'CrabLeft' : [(0, 'Hover'), (2, 'MoveLeft')],
-            'CrabRight' : [(0, 'Hover'), (2, 'MoveRight')],
+            'Forward' : [(0, 'Hover'), (0.5, 'MoveForward')],
+            'Backward' : [(0, 'Hover'), (0.5, 'MoveBackward')],
+            'Left' : [(0, 'Hover'), (0.5, 'MoveLeft')],
+            'Right' : [(0, 'Hover'), (0.5, 'MoveRight')],
+            'TurnLeft' : [(0, 'Hover'), (0.5, 'TurnLeft')],
+            'TurnRight' : [(0, 'Hover'), (0.5, 'TurnRight')],
+            'Up' : [(0, 'Hover'), (0.5, 'MoveUp')],
+            'Down' : [(0, 'Hover'), (0.5, 'MoveDown')],
+            
             'Wtf' : [(0, 'Hover'), (3, 'TurnLeft'), (3.2, 'MoveLeft')], # il devrait faire des ronds aberrants
             
 
@@ -83,6 +89,7 @@ class Node(rclpy.node.Node):
         Cette methode est appelée periodiquement
         Elle check si des behavior doivent etre engagés, et les active le cas echeant
         """
+
         current_time = self.get_clock().now().seconds_nanoseconds()[0]
         
         # Verification de si des evenements doivent etre engagés
@@ -100,9 +107,13 @@ class Node(rclpy.node.Node):
         behavior_msg.status = True
         self.behavior_publisher.publish(behavior_msg)
     
-    def _deactivate_all_behaviors(self):
-        self._activate_behavior('Hover')  # parce que hover c'est le neutre
+    def _deactivate_all_behaviors(self):      
         self.get_logger().info("Deactivating all behaviors...")
+        for behavior in self.behaviors :
+            behavior_msg = BehaviorStatus()
+            behavior_msg.name = behavior
+            behavior_msg.status = False
+            self.behavior_publisher.publish(behavior_msg)
         
 
 def main(args=None):

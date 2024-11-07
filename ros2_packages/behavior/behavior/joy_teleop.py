@@ -45,33 +45,137 @@ class Node(rclpy.node.Node):
         # Initialise l'état du bouton RB (deadman + trigger du décollage) 
         self.deadman_pressed = False
         self.hover_pressed = False
-       
+        self.emergency_pressed = False
+        self.forward = False
+        self.backward = False
+        self.left = False
+        self.right = False
+        self.up = False
+        self.down = False
+        self.turnleft = False
+        self.turnright = False
 
     def joy_callback(self, msg):
         command_msg = Command()
+        
 
-        # le bouton n'était pas enfoncé et on l'enfonce
+        # ATTENTION A DETECTER QUE le bouton n'était pas enfoncé et on l'enfonce
+        
+
+
         if msg.buttons[BUTTON_RB] == 1 and not self.deadman_pressed:
-            command_msg.command = "TakeOff"
-            self.command_publisher.publish(command_msg)
-            self.get_logger().info("RB pressed: Takeoff initiated")
-            self.deadman_pressed = True
+                command_msg.command = "TakeOff"
+                self.command_publisher.publish(command_msg)
+                self.get_logger().info("RB pressed: Takeoff initiated")
+                self.deadman_pressed = True
 
         elif msg.buttons[BUTTON_RB] == 0 and self.deadman_pressed:
-            command_msg.command = "Land"
-            self.command_publisher.publish(command_msg)
-            self.get_logger().info("RB released: Landing initiated")
-            self.deadman_pressed = False
-            self.hover_pressed = False
-       
+                command_msg.command = "Land"
+                self.command_publisher.publish(command_msg)
+                self.get_logger().info("RB released: Landing initiated")
+                self.deadman_pressed = False
+                self.hover_pressed = False       # va falloir la mettre à d'autres endroits
+                
 
-        # Ne publie de cmd de mvt que si le deadman est enfoncé (man not dead)
-        # elif self.deadman_pressed:
-        #     if msg.buttons[BUTTON_LB] == 1 and not self.hover_pressed:
-        #         command_msg.command = "Hover"
-        #         self.command_publisher.publish(command_msg)
-        #         self.get_logger().info("RB released: Landing initiated")
-        #         self.hover_pressed = True
+        if self.deadman_pressed:
+
+                if msg.buttons[BUTTON_LB] == 1 and not self.emergency_pressed:
+                    command_msg.command = "EmergencyStop"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("LB pressed: Emergency Stop !")
+                    self.emergency_pressed = True
+                
+                if msg.axes[AXIS_RT] <= -0.5 and not self.hover_pressed:
+                    command_msg.command = "Hover"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("RT pressed: Hover initiated")
+                    self.hover_pressed = True
+
+
+                if msg.axes[AXIS_LEFT_VERTICAL] >= 0.5 and not self.forward:
+                    command_msg.command = "Forward"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log forward")
+                    self.forward = True
+                
+                if msg.axes[AXIS_LEFT_VERTICAL] <= -0.5 and not self.backward:
+                    command_msg.command = "Backward"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log backward")
+                    self.backward = True
+
+                if msg.axes[AXIS_LEFT_HORIZONTAL] <= -0.5 and not self.right:
+                    command_msg.command = "Right"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log right")
+                    self.right = True
+                
+                if msg.axes[AXIS_LEFT_HORIZONTAL] >= 0.5 and not self.left:
+                    command_msg.command = "Left"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log left")
+                    self.left = True
+
+                if msg.axes[AXIS_RIGHT_VERTICAL] >= 0.5 and not self.up:
+                    command_msg.command = "Up"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log up")
+                    self.up = True
+
+                if msg.axes[AXIS_RIGHT_VERTICAL] <= -0.5 and not self.down:
+                    command_msg.command = "Down"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log down")
+                    self.down = True
+
+                if msg.axes[AXIS_RIGHT_HORIZONTAL] <= -0.5 and not self.turnright:
+                    command_msg.command = "TurnRight"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log turnright")
+                    self.turnright = True
+
+                if msg.axes[AXIS_RIGHT_HORIZONTAL] >= 0.5 and not self.turnleft:
+                    command_msg.command = "TurnLeft"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("log turnleft")
+                    self.turnleft = True
+
+
+
+                
+
+
+        if msg.buttons[BUTTON_LB] == 0 and self.emergency_pressed:
+                self.emergency_pressed = False
+        if msg.axes[AXIS_RT] >= 0 and self.hover_pressed:
+                self.hover_pressed = False 
+
+
+        if msg.axes[AXIS_LEFT_VERTICAL] <= 0.5 and self.forward:
+            self.forward = False
+                
+        if msg.axes[AXIS_LEFT_VERTICAL] >= -0.5 and self.backward:
+            self.backward = False
+
+        if msg.axes[AXIS_LEFT_HORIZONTAL] >= -0.5 and self.right:
+            self.right = False
+        
+        if msg.axes[AXIS_LEFT_HORIZONTAL] <= 0.5 and self.left:
+            self.left = False
+
+        if msg.axes[AXIS_RIGHT_VERTICAL] <= 0.5 and self.up:
+            self.up = False
+
+        if msg.axes[AXIS_RIGHT_VERTICAL] >= -0.5 and self.down:
+            self.down = False
+
+        if msg.axes[AXIS_RIGHT_HORIZONTAL] >= -0.5 and self.turnright:
+            self.turnright = False
+
+        if msg.axes[AXIS_RIGHT_HORIZONTAL] <= 0.5 and self.turnleft:
+            self.turnleft = False
+        
+
             # elif msg.axes[AXIS_LEFT_VERTICAL] > 0.5:
             #     command_msg.command = "MoveForward"
             # elif msg.axes[AXIS_LEFT_VERTICAL] < -0.5:
