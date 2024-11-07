@@ -70,10 +70,8 @@ class ShiftNode(Node):
             mll.draw_function(frame,ipast,0,height,0,ipast[0],(0,0,255),2) #passé
             mll.draw_function(frame,icurrent,0,height,0,ipast[0],(0,255,255),2) #actuel
 
-            diff= -shift + ipast[0]
-            mll.draw_function(frame,diff,0,height,0,ipast[0],(255,255,0),1)
-
-            print("shift",shift)
+            diff= h-shift
+            mll.draw_function(frame,diff,0,height,0,height,(255,255,0),1)
 
             outmsg = self.bridge.cv2_to_compressed_imgmsg(frame)
 

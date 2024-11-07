@@ -300,48 +300,35 @@ def intensity_mesure(img,h):
     return gray_image[h]
 
 
-def local_shift(i1,i2,sigma=50,p=20):
+def local_shift(i1,i2,sigma=30,p=10):
 
-    #We assume i1 and i2 are intensity curves
+   # Extraire la partie centrale d'intensity_1 pour éviter les débordements
+   cut_intensity_1 = i1[sigma + p : - (sigma + p)]
+   
+   # Définir les indices pour les positions x et les valeurs de décalage
+   x_indices = np.arange(len(cut_intensity_1))
+   s_values = np.arange(sigma + 1)
+   h_values = np.arange(-p, p + 1)
 
-    n=len(i1)
+   # Ajuster les indices pour générer des fenêtres de positions
+   pos = h_values + sigma + p
+   pos1 = x_indices[:, None] + pos
+   pos2 = x_indices[:, None, None] + s_values[None, :, None] + pos  # Création des fenêtres pour décalage
+   # Extraire les fenêtres d'intensité pour chaque position
+   intensity_1_window = i1[pos1]  # (positions x, fenêtre)
+   intensity_2_window = i2[pos2]  # (x, s, fenêtre)
+   
+   
+   # Calculer les différences au carré entre les deux fenêtres
+   diff_squared = (intensity_1_window[:, None, :] - intensity_2_window) ** 2
 
-    shift = np.zeros(n)   
-    h_values = np.arange(-p, p + 1)
+   # Calculer la somme des différences au carré pour chaque (s, x)
+   costs = diff_squared.sum(axis=-1)  # Somme sur la dimension fenêtre
 
-    i1_window = np.array([i1[max(0, x-p):min(n, x+p+1)] for x in range(n)]) 
-    i2_window = np.array([i2[max(0, x-p):min(n, x+p+1)] for x in range(n)])
-    
-    # Create all possible shifts for i_prime (we use np.roll to create shifted versions)
-    i2_shifted = np.array([
-        np.roll(i2_window, shift=s, axis=1) for s in range(sigma+1)
-    ])
+   # Trouver le décalage `s` qui minimise le coût pour chaque position `x`
+   optimal_shifts = costs.argmin(axis=1)
 
-    i2_shifted = i2_shifted[:, :, :i1_window.shape[1]]
+   padding = sigma + p
+   optimal_shifts = np.pad(optimal_shifts, (padding, padding), mode='constant', constant_values=0)
+   return optimal_shifts
 
-    # Broadcasting the subtraction and squaring
-    squared_diff = (i1_window[:, :, np.newaxis] - i2_shifted) ** 2
-    
-    error = np.sum(squared_diff, axis=1)
-    
-    shift = np.argmin(error, axis=1)
-
-    shift=shift.astype(int)
-    
-    shiftbis=np.zeros(n)
-
-    #Déplacement vers la droite
-
-    for x in range (sigma+p,n-sigma-p):
-        shiftbis[x]=np.argmin([sum([(i1[x+h]-i2[x+h-s])**2 for h in range (-p,p+1)]) for s in range (0,sigma)])
-
-    # print("shiftbis",shiftbis)
-    # print(len(shiftbis),n)
-
-    print("longueur shift = shiftbis",len(shift)==len(shiftbis))
-
-    shiftbis=shiftbis.astype(int)
-
-    print("shiftbis", shiftbis)
-    print("wtf")
-    return shift
