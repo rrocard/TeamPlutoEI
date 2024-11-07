@@ -5,7 +5,7 @@ from behavior_interface.msg import BehaviorStatus
 from .base_behavior import BaseBehavior  # Importing the base behavior class
 
 class AutoOff(BaseBehavior):
-    def __init__(self, behavior_name: str, duration_sec =  0.2):
+    def __init__(self, behavior_name: str, duration_sec =  0.4):
         super().__init__(behavior_name)
         self.duration_sec = duration_sec  # Duration to stay active in seconds
         self.timer = None

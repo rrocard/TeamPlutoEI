@@ -18,7 +18,7 @@ class Node(rclpy.node.Node):
         )
 
         # liste des behaviors possibles
-        self.behaviors = ['Land', 'TakeOff', 'Hover', 'MoveForward', 'MoveBackward' 'MoveLeft', 'MoveUp', 'MoveRight', 'TurnLeft', 'TurnRight']
+        self.behaviors = ['Land', 'TakeOff', 'Hover', 'MoveForward', 'MoveBackward', 'MoveLeft', 'MoveUp', 'MoveRight', 'TurnLeft', 'TurnRight']
         self.commands = {
             'TakeOff' : [(0, 'TakeOff')],
             'Land' : [(0, 'Land')],
@@ -26,8 +26,8 @@ class Node(rclpy.node.Node):
             'Hover' : [(0, 'Hover')],
             'Forward' : [(0, 'Hover'), (0.5, 'MoveForward')],
             'Backward' : [(0, 'Hover'), (0.5, 'MoveBackward')],
-            'CrabLeft' : [(0, 'Hover'), (0.5, 'MoveLeft')],
-            'CrabRight' : [(0, 'Hover'), (0.5, 'MoveRight')],
+            'Left' : [(0, 'Hover'), (0.5, 'MoveLeft')],
+            'Right' : [(0, 'Hover'), (0.5, 'MoveRight')],
             'TurnLeft' : [(0, 'Hover'), (0.5, 'TurnLeft')],
             'TurnRight' : [(0, 'Hover'), (0.5, 'TurnRight')],
             'Up' : [(0, 'Hover'), (0.5, 'MoveUp')],
