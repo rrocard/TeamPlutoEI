@@ -22,11 +22,17 @@ class Node(rclpy.node.Node):
         self.commands = {
             'TakeOff' : [(0, 'TakeOff')],
             'Land' : [(0, 'Land')],
+            'EmergencyStop' : [(0, 'Hover'), (1, 'Land')],
             'Hover' : [(0, 'Hover')],
-            'LeftTurn' : [(0, 'Hover'), (2, 'TurnLeft'), (3.5, 'Hover'), (4, 'MoveForward') ],
-            'RightTurn' : [(0, 'Hover'), (2, 'TurnRight'), (3.5, 'Hover'), (4, 'MoveForward') ],
-            'CrabLeft' : [(0, 'Hover'), (2, 'MoveLeft')],
-            'CrabRight' : [(0, 'Hover'), (2, 'MoveRight')],
+            'Forward' : [(0, 'Hover'), (0.5, 'MoveForward')],
+            'Backward' : [(0, 'Hover'), (0.5, 'MoveBackward')],
+            'CrabLeft' : [(0, 'Hover'), (0.5, 'MoveLeft')],
+            'CrabRight' : [(0, 'Hover'), (0.5, 'MoveRight')],
+            'TurnLeft' : [(0, 'Hover'), (0.5, 'TurnLeft')],
+            'TurnRight' : [(0, 'Hover'), (0.5, 'TurnRight')],
+            'Up' : [(0, 'Hover'), (0.5, 'MoveUp')],
+            'Down' : [(0, 'Hover'), (0.5, 'MoveDown')],
+            
             'Wtf' : [(0, 'Hover'), (3, 'TurnLeft'), (3.2, 'MoveLeft')], # il devrait faire des ronds aberrants
             
 
@@ -101,8 +107,13 @@ class Node(rclpy.node.Node):
         behavior_msg.status = True
         self.behavior_publisher.publish(behavior_msg)
     
-    def _deactivate_all_behaviors(self): 
+    def _deactivate_all_behaviors(self):      
         self.get_logger().info("Deactivating all behaviors...")
+        for behavior in self.behaviors :
+            behavior_msg = BehaviorStatus()
+            behavior_msg.name = behavior
+            behavior_msg.status = False
+            self.behavior_publisher.publish(behavior_msg)
         
 
 def main(args=None):

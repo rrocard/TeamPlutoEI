@@ -45,34 +45,52 @@ class Node(rclpy.node.Node):
         # Initialise l'état du bouton RB (deadman + trigger du décollage) 
         self.deadman_pressed = False
         self.hover_pressed = False
-       
+        self.emergency_pressed = False
 
     def joy_callback(self, msg):
         command_msg = Command()
+        
 
-        # le bouton n'était pas enfoncé et on l'enfonce
+        # ATTENTION A DETECTER QUE le bouton n'était pas enfoncé et on l'enfonce
+        
+
+
         if msg.buttons[BUTTON_RB] == 1 and not self.deadman_pressed:
-            command_msg.command = "TakeOff"
-            self.command_publisher.publish(command_msg)
-            self.get_logger().info("RB pressed: Takeoff initiated")
-            self.deadman_pressed = True
+                command_msg.command = "TakeOff"
+                self.command_publisher.publish(command_msg)
+                self.get_logger().info("RB pressed: Takeoff initiated")
+                self.deadman_pressed = True
 
         elif msg.buttons[BUTTON_RB] == 0 and self.deadman_pressed:
-            command_msg.command = "Land"
-            self.command_publisher.publish(command_msg)
-            self.get_logger().info("RB released: Landing initiated")
-            self.deadman_pressed = False
-            self.hover_pressed = False
-       
-
-        # Ne publie de cmd de mvt que si le deadman est enfoncé (man not dead)
-        elif self.deadman_pressed:
-            if msg.buttons[BUTTON_LB] == 1 and not self.hover_pressed:
-                command_msg.command = "Hover"
+                command_msg.command = "Land"
                 self.command_publisher.publish(command_msg)
-                self.get_logger().info("RL pressed: Hover initiated")
-                self.hover_pressed = True
+                self.get_logger().info("RB released: Landing initiated")
+                self.deadman_pressed = False
+                self.hover_pressed = False       # va falloir la mettre à d'autres endroits
+
+
+        if self.deadman_pressed:
+
+                if msg.buttons[BUTTON_LB] == 1 and not self.emergency_pressed:
+                    command_msg.command = "EmergencyStop"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("LB pressed: Emergency Stop !")
+                    self.emergency_pressed = True
                 
+                if msg.axes[AXIS_RT] <= -0.5 and not self.hover_pressed:
+                    command_msg.command = "Hover"
+                    self.command_publisher.publish(command_msg)
+                    self.get_logger().info("RT pressed: Hover initiated")
+                    self.hover_pressed = True
+
+
+        if msg.buttons[BUTTON_LB] == 0 and self.emergency_pressed:
+                self.emergency_pressed = False
+        if msg.axes[AXIS_RT] >= 0 and self.hover_pressed:
+                    self.hover_pressed = False  
+
+               
+
             # elif msg.axes[AXIS_LEFT_VERTICAL] > 0.5:
             #     command_msg.command = "MoveForward"
             # elif msg.axes[AXIS_LEFT_VERTICAL] < -0.5:
