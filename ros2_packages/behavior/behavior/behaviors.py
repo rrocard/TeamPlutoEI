@@ -2,16 +2,17 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Empty
+from std_msgs.msg import Float64
 from behavior_interface.msg import BehaviorStatus
 from .base_behavior import BaseBehavior
 from .auto_off import AutoOff
 
 
-
 class TakeOff(AutoOff):
     def __init__(self):
         super().__init__("TakeOff")
-        self.takeoff_publisher = self.create_publisher(Empty, '/bebop/takeoff', 10)
+        self.takeoff_publisher = self.create_publisher(
+            Empty, '/bebop/takeoff', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -37,10 +38,12 @@ class Land(AutoOff):
         else:
             self.get_logger().info("Land is now inactive.")
 
+
 class Hover(AutoOff):
     def __init__(self):
         super().__init__("Hover")
-        self.hover_publisher = self.create_publisher(Empty, '/hover', 10)  
+        self.hover_publisher = self.create_publisher(
+            Empty, '/hover_mode_toggle', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -52,11 +55,11 @@ class Hover(AutoOff):
             self.get_logger().info("Hover is now inactive.")
 
 
-
 class MoveForward(AutoOff):
     def __init__(self):
         super().__init__("MoveForward")
-        self.moveforward_publisher = self.create_publisher(Empty, 'linear_x', 10)
+        self.moveforward_publisher = self.create_publisher(
+            Empty, 'linear_x', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -67,10 +70,12 @@ class MoveForward(AutoOff):
         else:
             self.get_logger().info("MoveForward is now inactive.")
 
+
 class MoveBackward(AutoOff):
     def __init__(self):
         super().__init__("MoveBackward")
-        self.movebackward_publisher = self.create_publisher(Empty, 'linear_x', 10)
+        self.movebackward_publisher = self.create_publisher(
+            Empty, 'linear_x', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -80,6 +85,7 @@ class MoveBackward(AutoOff):
             self.get_logger().info("MoveBackward is now active and doing its task.")
         else:
             self.get_logger().info("MoveBackward is now inactive.")
+
 
 class MoveRight(AutoOff):
     def __init__(self):
@@ -95,6 +101,7 @@ class MoveRight(AutoOff):
         else:
             self.get_logger().info("MoveRight is now inactive.")
 
+
 class MoveLeft(AutoOff):
     def __init__(self):
         super().__init__("MoveLeft")
@@ -108,6 +115,7 @@ class MoveLeft(AutoOff):
             self.get_logger().info("MoveLeft is now active and doing its task.")
         else:
             self.get_logger().info("MoveLeft is now inactive.")
+
 
 class MoveUp(AutoOff):
     def __init__(self):
@@ -123,6 +131,7 @@ class MoveUp(AutoOff):
         else:
             self.get_logger().info("MoveUp is now inactive.")
 
+
 class MoveDown(AutoOff):
     def __init__(self):
         super().__init__("MoveDown")
@@ -137,10 +146,12 @@ class MoveDown(AutoOff):
         else:
             self.get_logger().info("MoveDown is now inactive.")
 
+
 class TurnRight(AutoOff):
     def __init__(self):
         super().__init__("TurnRight")
-        self.turnright_publisher = self.create_publisher(Empty, 'angular_z', 10)
+        self.turnright_publisher = self.create_publisher(
+            Empty, 'angular_z', 10)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -150,6 +161,7 @@ class TurnRight(AutoOff):
             self.get_logger().info("TurnRight is now active and doing its task.")
         else:
             self.get_logger().info("TurnRight is now inactive.")
+
 
 class TurnLeft(AutoOff):
     def __init__(self):
@@ -175,12 +187,14 @@ def takeoff():
     takeoff.destroy_node()
     rclpy.shutdown()
 
+
 def land():
     rclpy.init()
     land = Land()
     rclpy.spin(land)
     land.destroy_node()
     rclpy.shutdown()
+
 
 def hover():
     rclpy.init()
@@ -189,12 +203,14 @@ def hover():
     hover.destroy_node()
     rclpy.shutdown()
 
+
 def move_forward():
     rclpy.init()
     move_forward = MoveForward()
     rclpy.spin(move_forward)
     move_forward.destroy_node()
     rclpy.shutdown()
+
 
 def move_backward():
     rclpy.init()
@@ -203,12 +219,14 @@ def move_backward():
     move_backward.destroy_node()
     rclpy.shutdown()
 
+
 def move_right():
     rclpy.init()
     move_right = MoveRight()
     rclpy.spin(move_right)
     move_right.destroy_node()
     rclpy.shutdown()
+
 
 def move_left():
     rclpy.init()
@@ -217,12 +235,14 @@ def move_left():
     move_left.destroy_node()
     rclpy.shutdown()
 
+
 def move_up():
     rclpy.init()
     move_up = MoveUp()
     rclpy.spin(move_up)
     move_up.destroy_node()
     rclpy.shutdown()
+
 
 def move_down():
     rclpy.init()
@@ -231,12 +251,14 @@ def move_down():
     move_down.destroy_node()
     rclpy.shutdown()
 
+
 def turn_right():
     rclpy.init()
     turn_right = TurnRight()
     rclpy.spin(turn_right)
     turn_right.destroy_node()
     rclpy.shutdown()
+
 
 def turn_left():
     rclpy.init()
