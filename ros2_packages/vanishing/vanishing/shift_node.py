@@ -74,7 +74,7 @@ class ShiftNode(Node):
 
             mll.draw_function(frame,shift,h,7*height//8,0,sigma,(255,255,0),1)
 
-            door=mll.door(shift,sigma//2,width//3)
+            door=mll.door(shift,2*sigma//5,width//4)
 
             mll.draw_function(frame,door,h,7*height//8,0,1,(255,255,255),2)
 

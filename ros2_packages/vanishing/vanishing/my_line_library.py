@@ -350,12 +350,12 @@ def door(shift,shift_threshold,min_width=600):
     for start,end in ones:
 
         if abs(end - start) < min_width:
-            print("tofilter detected")
-            print(start,end,min_width)
+            # print("tofilter detected")
+            # print(start,end,min_width)
             
-            print(filtered_below[start:end])
-            filtered_below[start:end] = 0 # Masquer la zone trop petite
-            print(filtered_below[start:end])
+            # print(filtered_below[start:end])
+            filtered_below[max(0,start-1):min(856,end+1)] = 0 # Masquer la zone trop petite
+            # print(filtered_below[start:end])
    
 
     # test=shift < shift_threshold
