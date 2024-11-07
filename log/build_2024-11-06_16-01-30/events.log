@@ -1,0 +1,50 @@
+[0.000000] (-) TimerEvent: {}
+[0.000665] (lower_level) JobQueued: {'identifier': 'lower_level', 'dependencies': OrderedDict()}
+[0.001905] (lower_level) JobStarted: {'identifier': 'lower_level'}
+[0.098580] (-) TimerEvent: {}
+[0.198846] (-) TimerEvent: {}
+[0.299203] (-) TimerEvent: {}
+[0.399457] (-) TimerEvent: {}
+[0.499699] (-) TimerEvent: {}
+[0.599961] (-) TimerEvent: {}
+[0.700218] (-) TimerEvent: {}
+[0.800462] (-) TimerEvent: {}
+[0.900715] (-) TimerEvent: {}
+[0.992773] (lower_level) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/lower_level', 'build', '--build-base', '/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build', 'install', '--record', '/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/users/student/2022chojnackay/Bureau/EI/teamplutoei/src/lower_level', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'USER': '2022chojnackay', 'SSH_AGENT_PID': '164772', 'XDG_SESSION_TYPE': 'wayland', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/users/student/2022chojnackay', 'CHROME_DESKTOP': 'code-url-handler.desktop', 'OLDPWD': '/users/student/2022chojnackay/Bureau/EI', 'TERM_PROGRAM_VERSION': '1.79.2', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '1837', 'SYSTEMD_EXEC_PID': '1982', 'IM_CONFIG_CHECK_ENV': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/310673/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '2450', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/users/student/2022chojnackay/Bureau/EI/install', 'ROS_DISTRO': 'humble', 'LOGNAME': '2022chojnackay', 'JOURNAL_STREAM': '8:31361', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': '2022chojnackay', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/mfopt14:@/tmp/.ICE-unix/1958,unix/mfopt14:/tmp/.ICE-unix/1958', 'INVOCATION_ID': 'cb71da305d204073996ee8710164f6d3', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/310673', 'GDK_BACKEND': 'x11', 'DISPLAY': ':0', 'LANG': 'fr_FR.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/310673/.mutter-Xwaylandauth.KMLQW2', 'VSCODE_GIT_IPC_HANDLE': '/run/user/310673/vscode-git-ca4045a4f1.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/tmp/ssh-XXXXXX0YEdVa/agent.164771', 'ROS_DOMAIN_ID': '17', 'AMENT_PREFIX_PATH': '/users/student/2022chojnackay/Bureau/EI/install/lower_level:/opt/ros/humble', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'GJS_DEBUG_OUTPUT': 'stderr', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '--ms-enable-electron-run-as-node', 'QT_IM_MODULE': 'ibus', 'PWD': '/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages:/users/student/2022chojnackay/Bureau/EI/install/lower_level/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[1.004417] (-) TimerEvent: {}
+[1.104605] (-) TimerEvent: {}
+[1.204853] (-) TimerEvent: {}
+[1.305116] (-) TimerEvent: {}
+[1.308714] (lower_level) StdoutLine: {'line': b'running egg_info\n'}
+[1.311320] (lower_level) StdoutLine: {'line': b'writing ../../build/lower_level/lower_level.egg-info/PKG-INFO\n'}
+[1.317625] (lower_level) StdoutLine: {'line': b'writing dependency_links to ../../build/lower_level/lower_level.egg-info/dependency_links.txt\n'}
+[1.322660] (lower_level) StdoutLine: {'line': b'writing entry points to ../../build/lower_level/lower_level.egg-info/entry_points.txt\n'}
+[1.327780] (lower_level) StdoutLine: {'line': b'writing requirements to ../../build/lower_level/lower_level.egg-info/requires.txt\n'}
+[1.331874] (lower_level) StdoutLine: {'line': b'writing top-level names to ../../build/lower_level/lower_level.egg-info/top_level.txt\n'}
+[1.341258] (lower_level) StdoutLine: {'line': b"reading manifest file '../../build/lower_level/lower_level.egg-info/SOURCES.txt'\n"}
+[1.343923] (lower_level) StdoutLine: {'line': b"writing manifest file '../../build/lower_level/lower_level.egg-info/SOURCES.txt'\n"}
+[1.348377] (lower_level) StdoutLine: {'line': b'running build\n'}
+[1.348932] (lower_level) StdoutLine: {'line': b'running build_py\n'}
+[1.350402] (lower_level) StdoutLine: {'line': b'copying lower_level/slide.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level\n'}
+[1.355533] (lower_level) StdoutLine: {'line': b'copying lower_level/u_turn.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level\n'}
+[1.361756] (lower_level) StdoutLine: {'line': b'running install\n'}
+[1.362667] (lower_level) StdoutLine: {'line': b'running install_lib\n'}
+[1.364611] (lower_level) StdoutLine: {'line': b'copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/slide.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level\n'}
+[1.371570] (lower_level) StdoutLine: {'line': b'copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/u_turn.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level\n'}
+[1.379693] (lower_level) StdoutLine: {'line': b'byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/slide.py to slide.cpython-310.pyc\n'}
+[1.388976] (lower_level) StdoutLine: {'line': b'byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/u_turn.py to u_turn.cpython-310.pyc\n'}
+[1.398070] (lower_level) StdoutLine: {'line': b'running install_data\n'}
+[1.398260] (lower_level) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.399971] (lower_level) StdoutLine: {'line': b"removing '/users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[1.405215] (-) TimerEvent: {}
+[1.413179] (lower_level) StdoutLine: {'line': b'Copying ../../build/lower_level/lower_level.egg-info to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level-0.0.0-py3.10.egg-info\n'}
+[1.473591] (lower_level) StdoutLine: {'line': b'running install_scripts\n'}
+[1.495009] (lower_level) StdoutLine: {'line': b'Installing joyteleop script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level\n'}
+[1.500962] (lower_level) StdoutLine: {'line': b'Installing speed_controller script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level\n'}
+[1.505286] (-) TimerEvent: {}
+[1.506602] (lower_level) StdoutLine: {'line': b'Installing twist2pic script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level\n'}
+[1.513798] (lower_level) StdoutLine: {'line': b"writing list of installed files to '/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log'\n"}
+[1.545098] (lower_level) CommandEnded: {'returncode': 0}
+[1.605417] (-) TimerEvent: {}
+[1.610552] (lower_level) JobEnded: {'identifier': 'lower_level', 'rc': 0}
+[1.617652] (-) EventReactorShutdown: {}
