@@ -70,8 +70,9 @@ class Node(rclpy.node.Node):
             if msg.buttons[BUTTON_LB] == 1 and not self.hover_pressed:
                 command_msg.command = "Hover"
                 self.command_publisher.publish(command_msg)
-                self.get_logger().info("RB released: Landing initiated")
+                self.get_logger().info("RL pressed: Hover initiated")
                 self.hover_pressed = True
+                
             # elif msg.axes[AXIS_LEFT_VERTICAL] > 0.5:
             #     command_msg.command = "MoveForward"
             # elif msg.axes[AXIS_LEFT_VERTICAL] < -0.5:
@@ -85,9 +86,9 @@ class Node(rclpy.node.Node):
             #     command_msg.command = "EmergencyStop"
 
         # Ne publie que si une commande est envoyée
-        if command_msg.command:
-            self.command_publisher.publish(command_msg)
-            self.get_logger().info(f"Published command: {command_msg.command}")
+        # if command_msg.command:
+        #     self.command_publisher.publish(command_msg)
+        #     self.get_logger().info(f"Published command: {command_msg.command}")
 
         # elif msg.buttons[BUTTON_LOGITECH] == 1:
         #     command_msg.command = "Wtf"

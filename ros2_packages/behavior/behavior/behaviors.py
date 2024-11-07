@@ -40,8 +40,8 @@ class Land(AutoOff):
 class Hover(BaseBehavior):
     def __init__(self):
         super().__init__("Hover")
-        self.hover_publisher = self.create_publisher(Empty, 'hover', 10)   #SÛR QUE HOVER ?
-
+        self.hover_publisher = self.create_publisher(Empty, '/hover', 10)  
+        
     def on_status(self, status: bool):
         super().on_status(status)
         if status:

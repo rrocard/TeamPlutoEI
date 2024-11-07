@@ -83,6 +83,7 @@ class Node(rclpy.node.Node):
         Cette methode est appelée periodiquement
         Elle check si des behavior doivent etre engagés, et les active le cas echeant
         """
+
         current_time = self.get_clock().now().seconds_nanoseconds()[0]
         
         # Verification de si des evenements doivent etre engagés
@@ -100,8 +101,7 @@ class Node(rclpy.node.Node):
         behavior_msg.status = True
         self.behavior_publisher.publish(behavior_msg)
     
-    def _deactivate_all_behaviors(self):
-        self._activate_behavior('Hover')  # parce que hover c'est le neutre
+    def _deactivate_all_behaviors(self): 
         self.get_logger().info("Deactivating all behaviors...")
         
 
