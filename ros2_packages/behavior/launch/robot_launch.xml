@@ -2,7 +2,7 @@
 <launch>
   <node pkg="behavior" exec="takeoff" name="takeoff" />
   <node pkg="behavior" exec="land" name="land" />
-  <node pkg="behavior" exec="hover" name="hover" />
+
   <node pkg="behavior" exec="joy_teleop" name="joy_teleop" />
   <node pkg="behavior" exec="command" name="command" />
   <node pkg="behavior" exec="status_viewer" name="status_viewer" />

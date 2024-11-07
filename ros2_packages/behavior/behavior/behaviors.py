@@ -37,18 +37,7 @@ class Land(AutoOff):
         else:
             self.get_logger().info("Land is now inactive.")
 
-class Hover(BaseBehavior):
-    def __init__(self):
-        super().__init__("Hover")
-        self.hover_publisher = self.create_publisher(Empty, 'hover', 10)   #SÛR QUE HOVER ?
 
-    def on_status(self, status: bool):
-        super().on_status(status)
-        if status:
-            self.hover_publisher.publish(Empty())
-            self.get_logger().info("Hover is now active and doing its task.")
-        else:
-            self.get_logger().info("Hover is now inactive.")
 
 # Cree un node pour chaque Behavior
 
@@ -66,9 +55,3 @@ def land():
     land.destroy_node()
     rclpy.shutdown()
 
-def hover():
-    rclpy.init()
-    hover = Hover()
-    rclpy.spin(hover)
-    hover.destroy_node()
-    rclpy.shutdown()
