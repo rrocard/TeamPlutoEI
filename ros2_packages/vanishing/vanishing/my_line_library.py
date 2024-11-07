@@ -300,33 +300,48 @@ def intensity_mesure(img,h):
     return gray_image[h]
 
 
-def local_shift(i1,i2,sigma=5,p=2):
+def local_shift(i1,i2,sigma=50,p=20):
 
     #We assume i1 and i2 are intensity curves
 
     n=len(i1)
-    shift=np.zeros(n)
 
+    shift = np.zeros(n)   
+    h_values = np.arange(-p, p + 1)
 
-    # i1_expanded = i1.reshape(1, -1)  
-    # i2_expanded = i2.reshape(1, -1)
+    i1_window = np.array([i1[max(0, x-p):min(n, x+p+1)] for x in range(n)]) 
+    i2_window = np.array([i2[max(0, x-p):min(n, x+p+1)] for x in range(n)])
+    
+    # Create all possible shifts for i_prime (we use np.roll to create shifted versions)
+    i2_shifted = np.array([
+        np.roll(i2_window, shift=s, axis=1) for s in range(sigma+1)
+    ])
 
-    # h_range = np.arange(-p, p)
-    # s_range = np.arange(sigma) 
+    i2_shifted = i2_shifted[:, :, :i1_window.shape[1]]
 
+    # Broadcasting the subtraction and squaring
+    squared_diff = (i1_window[:, :, np.newaxis] - i2_shifted) ** 2
+    
+    error = np.sum(squared_diff, axis=1)
+    
+    shift = np.argmin(error, axis=1)
 
-    # diffs = np.array([[np.sum((i1_expanded[0, x + h_range] - i2_expanded[0, x + h_range - s])**2) for s in s_range] for x in range(n)])
-
-    # shift = np.argmin(squared_diff, axis=1)
+    shift=shift.astype(int)
     
     shiftbis=np.zeros(n)
 
     #Déplacement vers la droite
+
     for x in range (sigma+p,n-sigma-p):
-        shiftbis[x]=np.argmin([sum([(i1[x+h]-i2[x+h-s])**2 for h in range (-p,p)]) for s in range (0,sigma)])
+        shiftbis[x]=np.argmin([sum([(i1[x+h]-i2[x+h-s])**2 for h in range (-p,p+1)]) for s in range (0,sigma)])
 
     # print("shiftbis",shiftbis)
     # print(len(shiftbis),n)
+
+    print("longueur shift = shiftbis",len(shift)==len(shiftbis))
+
     shiftbis=shiftbis.astype(int)
 
-    return shiftbis
+    print("shiftbis", shiftbis)
+    print("wtf")
+    return shift
