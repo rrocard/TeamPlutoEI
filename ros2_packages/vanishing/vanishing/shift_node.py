@@ -8,6 +8,7 @@ from cv_bridge import CvBridge
 import cv2
 import numpy as np
 import time
+from scipy.ndimage import median_filter
 
 from vanishing import my_line_library as mll
 
@@ -37,59 +38,56 @@ class ShiftNode(Node):
         self.previousimg=None
 
     def on_image(self,msg):
+                  
+
         frame = self.bridge.compressed_imgmsg_to_cv2(msg, "bgr8")
         self.get_logger().info(
             f"Receiving video frame {frame.shape}, of type : {type(frame)}"
         )
-        outmsg = self.bridge.cv2_to_compressed_imgmsg(frame)
 
 
         width=frame.shape[1]
         height=frame.shape[0]
         h=height//2
 
-        
+        previousimg=frame.copy()
+
         if self.previousimg is not None  :
 
-            
-            start_time=time.time()
+  
             icurrent=mll.intensity_mesure(frame,h)
             ipast=mll.intensity_mesure(self.previousimg,h)
-            end_time=time.time()
 
-            print(end_time-start_time)
+            icurrent=median_filter(icurrent,size=10)
+            ipast=median_filter(ipast,size=10)
 
-            self.previousimg=frame 
+            mll.draw_function(frame,ipast,0,h,0,255,(0,0,255),2) #passé
+            mll.draw_function(frame,icurrent,0,h,0,255,(0,255,255),2) #actuel
 
-            start_time=time.time()
-            shift=mll.local_shift(ipast,icurrent)
-            end_time=time.time()
+            # self.get_logger().info("past : "+str(ipast))
+            # self.get_logger().info("current : "+str(icurrent))
 
-            print(end_time-start_time)
+            sigma=50
+            shift=mll.local_shift(ipast,icurrent,sigma,25)
 
-            mll.draw_function(frame,ipast,0,height,0,ipast[0],(0,0,255),2) #passé
-            mll.draw_function(frame,icurrent,0,height,0,ipast[0],(0,255,255),2) #actuel
+            shift=median_filter(shift,size=25)
 
-            diff= h-shift
-            mll.draw_function(frame,diff,0,height,0,height,(255,255,0),1)
+            mll.draw_function(frame,shift,h,7*height//8,0,sigma,(255,255,0),1)
+
+            door=mll.door(shift,sigma//2,width//3)
+
+            mll.draw_function(frame,door,h,7*height//8,0,1,(255,255,255),2)
 
             outmsg = self.bridge.cv2_to_compressed_imgmsg(frame)
-
             self.debug_pub.publish(outmsg)
         
         else:
             outmsg = self.bridge.cv2_to_compressed_imgmsg(frame)
-
-            self.previousimg=frame
             print("no parent")
             self.debug_pub.publish(outmsg)
         
-
-        
-
-
-
-   
+        self.previousimg=previousimg
+    
 
     def on_speed(self,msg):
         return None

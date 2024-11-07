@@ -52,12 +52,14 @@ def from_lsd(lines_lsd):
 def draw_function(img,Y,hmin,hmax,ymin,ymax,color,thickness):
 
     width=img.shape[1]
-    cv2.line(img,(0,ymin),(width,ymin),(255,0,255),2)    
-    cv2.line(img,(0,ymax),(width,ymax),(255,0,255),2)
-    
+
+    scal_Y=np.clip( (Y - ymin)/(ymax-ymin),0,1) #On normalise les valeurs de Y entre 0 et 1
+    map_Y=((hmax-hmin)*scal_Y).astype(int)+hmin
+
+
     n=len(Y)
     for i in range (n-1):
-        cv2.line(img,(i,Y[i]),(i+1,Y[i+1]),color,thickness)
+        cv2.line(img,(i,map_Y[i]),(i+1,map_Y[i+1]),color,thickness)
     
 
 def draw_segments(img, segments, color, thickness):
@@ -332,3 +334,52 @@ def local_shift(i1,i2,sigma=30,p=10):
    optimal_shifts = np.pad(optimal_shifts, (padding, padding), mode='constant', constant_values=0)
    return optimal_shifts
 
+def door(shift,shift_threshold,min_width=600):
+
+    #Cette fonction lie le shift et associe les zones de shift bas à la présence d'une porte
+    #Néanmoins pour éviter le bruit, il faut que ces zones soient d'une largeur minimal min_width
+
+    below_treshold = shift < shift_threshold
+
+    below_treshold = below_treshold.astype(int)
+
+    filtered_below=below_treshold.copy()
+
+    transitions=np.diff(below_treshold)
+
+    transitions = np.concatenate(([0], transitions, [0]))   
+
+    zone_start_indices=np.where(transitions==1)[0]
+    zone_end_indices=np.where(transitions==-1)[0]
+    
+    #if on commence en up
+    zone_start_indices = np.insert(zone_start_indices,0,0)
+    zone_end_indices = np.concatenate((zone_end_indices, [856])) 
+
+    print("zstratind",zone_start_indices)
+    print("zend",zone_end_indices)
+
+    for start, end in zip(zone_start_indices, zone_end_indices):
+
+        if abs(end - start) < min_width:
+            print("tofilter detected")
+            print(start,end,min_width)
+
+            if start > end:
+                start, end = end, start
+            
+            print(filtered_below[start:end])
+            filtered_below[start:end] = 0 # Masquer la zone trop petite
+            print(filtered_below[start:end])
+   
+
+    # test=shift < shift_threshold
+    # test=test.astype(int)
+
+    if np.array_equal(below_treshold,filtered_below):
+        print("nonfiltré")
+    else :
+        print("filtered")
+        
+
+    return filtered_below
