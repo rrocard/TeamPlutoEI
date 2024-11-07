@@ -41,8 +41,11 @@ class JoyTeleop(Node):
         # Joystick control mapping with discretization
         linear_x = self.discretize_joystick_input(msg.axes[0])  # Left stick horizontal
         linear_y = self.discretize_joystick_input(msg.axes[1])  # Left stick vertical
-        angular_z = self.discretize_joystick_input(msg.axes[2])  # Right stick horizontal
-        linear_z = self.discretize_joystick_input(msg.axes[3])  # Right stick vertical
+        angular_z = self.discretize_joystick_input(msg.axes[3])  # Right stick horizontal
+        linear_z = self.discretize_joystick_input(msg.axes[4])  # Right stick vertical
+
+        
+        self.get_logger().info(f"discretize test : {linear_x}")
 
         # Publish the joystick axes values to respective topics
         self.publish_joystick_values(linear_x, linear_y, linear_z, angular_z)
@@ -54,14 +57,10 @@ class JoyTeleop(Node):
             self.hover_mode_pub.publish(Bool(data=self.hover_mode))
 
     def discretize_joystick_input(self, value):
-        """
-        Discretizes the joystick axis value into one of three possible values: 
-        -1 (move in negative direction), 0 (neutral/centered), 1 (move in positive direction).
-        """
-        if value > 0.5:
-            return 1.0  # Forward or right (depending on axis)
-        elif value < -0.5:
-            return -1.0  # Backward or left (depending on axis)
+        if value > 0.1:
+            return value  # Forward or right (depending on axis)
+        elif value < -0.1:
+            return value  # Backward or left (depending on axis)
         else:
             return 0.0  # No movement (neutral)
 
