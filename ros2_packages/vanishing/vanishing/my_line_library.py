@@ -126,10 +126,16 @@ def intersections(segments):
                                       coeff * np.cross(sj[[4, 6]], si[[4, 6]])]) # -[a1, c1] ^ [a2, c2]
     return np.array(intersections)
 
-def vanishing_point(img,segments,xlim=40,ylim=120):
+def vanishing_point(img,segments,xlim=40,ylim=40):
 
     width=img.shape[1]
     height=img.shape[0]
+
+    cv2.line(img, (img.shape[1]-xlim,ylim), (img.shape[1]-xlim, img.shape[0]-ylim), (255, 255,0 ), 1)
+    cv2.line(img, (xlim, ylim), (xlim, img.shape[0]-ylim), (255, 255,0 ), 1)
+
+    cv2.line(img, (xlim,ylim), (img.shape[1]-xlim, ylim), (255, 255,0 ), 1)
+    cv2.line(img, (xlim, img.shape[0]-ylim), (img.shape[1]-xlim, img.shape[0]-ylim), (255, 255,0 ), 1)
 
     intersect=intersections(segments)
     

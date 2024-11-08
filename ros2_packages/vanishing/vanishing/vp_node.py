@@ -53,9 +53,9 @@ class VPNode(Node):
             CompressedImage, "/debug/vpimg/image_raw/compressed", 1
         )
 
-        self.horizontal_displacement = self.create_publisher(Float32, "horizontal_displacement",10)
+        self.horizontal_displacement = self.create_publisher(Float32, "vp_offset",10)
 
-        self.angle_ratio = self.create_publisher(Float32,"angle_ratio", 10)
+        self.angle_ratio = self.create_publisher(Float32,"vp_angle", 10)
 
         #TODO: Define here your additional publishers
         # The publishers must always be defined before the subscribers
@@ -93,20 +93,21 @@ class VPNode(Node):
 
         #if self.horizontal_displacement.get_subscription_count() > 0 or self.angle_ratio.get_subscription_count() > 0 :
                 
-        lines=mll.length_filtering(lines) #On utilise les arguments par défaut des fonctions 
+        lines=mll.length_filtering(lines,80) #On utilise les arguments par défaut des fonctions 
 
         #On affiche les lignes à filtrer
         mll.draw_lines(frame, lines, (0, 0, 255), 1)
 
-        lines=mll.ceiling_filtering(lines) 
-        lines=mll.angle_filtering(lines)
+        lines=mll.ceiling_filtering(lines,20) 
+        lines=mll.angle_filtering(lines,85,20)
         lines=mll.cluster_filtering(frame,lines)
 
         #On affiche les lines gardées après filtrage
         mll.draw_lines(frame, lines, (50, 255, 255), 1)
 
-
-        vanishing_point=mll.vanishing_point(frame,lines)
+        ylim=20
+        xlim=80
+        vanishing_point=mll.vanishing_point(frame,lines,xlim,ylim)
 
         cv2.circle(frame, (int(vanishing_point[0]),int(vanishing_point[1])), 5, (0,0,255),-1)
 
@@ -115,7 +116,11 @@ class VPNode(Node):
         
 
         horizontal_displacement=vanishing_point[0]-width//2
-        normalized_horizontal_displacement=horizontal_displacement/width*0.5
+
+        #Remapping from [-width/2,width/2]
+        normalized_horizontal_displacement=horizontal_displacement/width/2
+
+
 
         msg_horizontal=Float32()
         msg_horizontal.data=float(normalized_horizontal_displacement)
@@ -129,10 +134,16 @@ class VPNode(Node):
             ratio = 0
         else :
             tan = lines[..., 4]/lines[...,5]
-            angle=np.arctan(ab)
-            ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
+            angle=np.arctan(tan)
+            print("angle",angle)
+            a,b=angle
+            if np.sign(a)!=np.sign(b):
+                ratio=angle[0]+angle[1] #pb des valeurs positives et comment déterminer droite gauche ?
+            else :
+                ratio=0
+
             
-        normalized_ratio=(ratio - 0.5)*180/np.pi
+        normalized_ratio=ratio/np.pi #remaping from [-pi/2,pi/2] to [-1/2,1/2]
 
         print("ratio",ratio)
         print("normalized ratio", normalized_ratio)

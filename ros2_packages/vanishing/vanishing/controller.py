@@ -68,7 +68,7 @@ class Controller(Node):
             ParameterDescriptor(description="The maximal angular velocity"),
         )
         self.define_nbc_nodes()
-        self.cmd_vel_pub = self.create_publisher(Twist, "cmd_vel", 1)
+        self.cmd_vel_pub = self.create_publisher(Twist, "/bebop/cmd_vel", 1)
 
         self.angle_bounds = (-0.75, 0.75)
         self.offset_bounds = (-0.75, 0.75)
@@ -91,15 +91,15 @@ class Controller(Node):
         self.nbc.clear_nodes()
         # TODO: You can define your nodes here
         # as two tuples (position in S space), (linear vel, angular vel)
-        self.nbc.add_node((0, 0), (1.0, 0.0))
-        self.nbc.add_node((0, 0.25), (1.0, -1.0))
-        self.nbc.add_node((0, -0.25), (1.0, 1.0))
-        self.nbc.add_node((0.5, 0), (1.0, -1.0))
-        self.nbc.add_node((0.5, 0.25), (1.0, -1.0))
-        self.nbc.add_node((0.5, -0.25), (0.0, 1.0))
-        self.nbc.add_node((-0.5, 0), (1.0, 1.0))
-        self.nbc.add_node((-0.5, 0.25), (0.0, -1.0))
-        self.nbc.add_node((-0.5, -0.25), (1.0, -1.0))
+        self.nbc.add_node((0, 0), (0.1, 0.0))
+        self.nbc.add_node((0, 0.25), (0.05, 0.0))
+        self.nbc.add_node((0, -0.25), (0.05, 0.0))
+        self.nbc.add_node((0.5, 0), (0.1, 0.25))
+        self.nbc.add_node((0.5, 0.25), (0.05, 0.25))
+        self.nbc.add_node((0.5, -0.25), (0.05, 0.25))
+        self.nbc.add_node((-0.5, 0), (0.1, -0.25))
+        self.nbc.add_node((-0.5, 0.25), (0.05, -0.25))
+        self.nbc.add_node((-0.5, -0.25), (0.05, -0.25))
 
     c1 = np.array([1, 0])
     c2 = np.array([1, -1])
