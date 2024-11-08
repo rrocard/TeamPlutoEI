@@ -17,9 +17,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'twist2pic = lower_level.twist2pic:main',  # Points to main() in lower_level/twist2pic.py
             'joyteleop = lower_level.joyteleop:main',  # Points to main() in lower_level/joyteleop.py
             'speed_controller = lower_level.speed_controller:main',
+            'slide=lower_level.slide:main',
+            'u_turn=lower_level.u_turn:main'
+
         ],
     },
     data_files=[

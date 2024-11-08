@@ -35,16 +35,16 @@ class SpeedController(Node):
         self.hover_mode = False
 
         # Subscribe to individual topics
-        self.create_subscription(Float64, 'linear_x', self.linear_x_callback, 10)
-        self.create_subscription(Float64, 'linear_y', self.linear_y_callback, 10)
-        self.create_subscription(Float64, 'linear_z', self.linear_z_callback, 10)
-        self.create_subscription(Float64, 'angular_z', self.angular_z_callback, 10)
+        self.create_subscription(Float64, 'linear_x', self.linear_x_callback, 100)
+        self.create_subscription(Float64, 'linear_y', self.linear_y_callback, 100)
+        self.create_subscription(Float64, 'linear_z', self.linear_z_callback, 100)
+        self.create_subscription(Float64, 'angular_z', self.angular_z_callback, 100)
 
         # Subscribe to hover mode toggle topic
-        self.create_subscription(Bool, 'hover_mode_toggle', self.hover_mode_callback, 10)
+        self.create_subscription(Bool, 'hover_mode_toggle', self.hover_mode_callback, 100)
 
         # Publisher for modified cmd_vel
-        self.cmd_vel_pub = self.create_publisher(Twist, '/bebop/cmd_vel', 10)
+        self.cmd_vel_pub = self.create_publisher(Twist, '/bebop/cmd_vel', 100)
 
     def linear_x_callback(self, msg):
         self.linear_x = msg.data
@@ -72,7 +72,7 @@ class SpeedController(Node):
 
     def publish_cmd_vel(self):
         # Log the current joystick values
-        self.get_logger().info(f"Current joystick values -> linear_x: {self.linear_x}, linear_y: {self.linear_y}, angular_z: {self.angular_z}, linear_z: {self.linear_z}")
+        # self.get_logger().info(f"Current joystick values -> linear_x: {self.linear_x}, linear_y: {self.linear_y}, angular_z: {self.angular_z}, linear_z: {self.linear_z}")
 
         # Apply PID if hover mode is OFF, otherwise set linear speeds to zero
         if self.hover_mode:
@@ -101,7 +101,7 @@ class SpeedController(Node):
         new_msg.angular.z = self.angular_z
 
         # Log the Twist message that will be published
-        self.get_logger().info(f"Publishing cmd_vel -> linear_x: {new_msg.linear.x}, linear_y: {new_msg.linear.y}, linear_z: {new_msg.linear.z}, angular_z: {new_msg.angular.z}")
+        # self.get_logger().info(f"Publishing cmd_vel -> linear_x: {new_msg.linear.x}, linear_y: {new_msg.linear.y}, linear_z: {new_msg.linear.z}, angular_z: {new_msg.angular.z}")
 
         # Publish the modified command to 'cmd_vel'
         self.cmd_vel_pub.publish(new_msg)

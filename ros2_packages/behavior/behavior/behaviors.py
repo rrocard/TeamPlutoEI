@@ -2,17 +2,19 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Empty
+from std_msgs.msg import Bool
 from std_msgs.msg import Float64
 from behavior_interface.msg import BehaviorStatus
 from .base_behavior import BaseBehavior
 from .auto_off import AutoOff
+import time
 
 
 class TakeOff(AutoOff):
     def __init__(self):
         super().__init__("TakeOff")
         self.takeoff_publisher = self.create_publisher(
-            Empty, '/bebop/takeoff', 10)
+            Empty, '/bebop/takeoff', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -27,7 +29,7 @@ class TakeOff(AutoOff):
 class Land(AutoOff):
     def __init__(self):
         super().__init__("Land")
-        self.land_publisher = self.create_publisher(Empty, '/bebop/land', 10)
+        self.land_publisher = self.create_publisher(Empty, '/bebop/land', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
@@ -42,13 +44,16 @@ class Land(AutoOff):
 class Hover(AutoOff):
     def __init__(self):
         super().__init__("Hover")
-        self.hover_publisher = self.create_publisher(Empty, '/hover_mode_toggle', 10)
+        self.hover_publisher = self.create_publisher(Bool, '/hover_mode_toggle', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
-            self.hover_publisher.publish(Empty())
+            hovermsg = Bool()
+            hovermsg.data = True
+            self.hover_publisher.publish(hovermsg)
+
             self.get_logger().info("Hover is now active and doing its task.")
         else:
             self.get_logger().info("Hover is now inactive.")
@@ -57,31 +62,53 @@ class Hover(AutoOff):
 class MoveForward(AutoOff):
     def __init__(self):
         super().__init__("MoveForward")
-        self.moveforward_publisher = self.create_publisher(Float64, 'linear_x', 10)
+        self.moveforward_publisher = self.create_publisher(Float64, 'linear_x', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = 0.3
+            vitesse.data = 0.1
             self.moveforward_publisher.publish(vitesse)
             self.get_logger().info("MoveForward is now active and doing its task.")
         else:
             self.get_logger().info("MoveForward is now inactive.")
 
-
-class MoveBackward(AutoOff):
+class Center(AutoOff):
     def __init__(self):
-        super().__init__("MoveBackward")
-        self.movebackward_publisher = self.create_publisher(Float64, 'linear_x', 10)
+        super().__init__("Center")
+        self.x_publisher = self.create_publisher(Float64, 'linear_x', 100)
+        self.y_publisher = self.create_publisher(Float64, 'linear_y', 100)
+        self.z_publisher = self.create_publisher(Float64, 'linear_z', 100)
+        self.az_publisher = self.create_publisher(Float64, 'angular_z', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = -0.3
+            vitesse.data = 0.0
+            self.x_publisher.publish(vitesse)
+            self.y_publisher.publish(vitesse)
+            self.z_publisher.publish(vitesse)
+            self.az_publisher.publish(vitesse)
+            self.get_logger().info("Center is now active and doing its task.")
+        else:
+            self.get_logger().info("Center is now inactive.")
+
+
+class MoveBackward(AutoOff):
+    def __init__(self):
+        super().__init__("MoveBackward")
+        self.movebackward_publisher = self.create_publisher(Float64, 'linear_x', 100)
+
+    def on_status(self, status: bool):
+        super().on_status(status)
+        if status:
+            self.timer.reset()
+            vitesse = Float64()
+            vitesse.data = -0.1
             self.movebackward_publisher.publish(vitesse)
             self.get_logger().info("MoveBackward is now active and doing its task.")
         else:
@@ -91,14 +118,14 @@ class MoveBackward(AutoOff):
 class MoveRight(AutoOff):
     def __init__(self):
         super().__init__("MoveRight")
-        self.moveright_publisher = self.create_publisher(Float64, 'linear_y', 10)
+        self.moveright_publisher = self.create_publisher(Float64, 'linear_y', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = 0.3
+            vitesse.data = 0.1
             self.moveright_publisher.publish(vitesse)
             self.get_logger().info("MoveRight is now active and doing its task.")
         else:
@@ -108,14 +135,14 @@ class MoveRight(AutoOff):
 class MoveLeft(AutoOff):
     def __init__(self):
         super().__init__("MoveLeft")
-        self.moveleft_publisher = self.create_publisher(Float64, 'linear_y', 10)
+        self.moveleft_publisher = self.create_publisher(Float64, 'linear_y', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = -0.3
+            vitesse.data = -0.1
             self.moveleft_publisher.publish(vitesse)
             self.get_logger().info("MoveLeft is now active and doing its task.")
         else:
@@ -125,14 +152,14 @@ class MoveLeft(AutoOff):
 class MoveUp(AutoOff):
     def __init__(self):
         super().__init__("MoveUp")
-        self.moveup_publisher = self.create_publisher(Float64, 'linear_z', 10)
+        self.moveup_publisher = self.create_publisher(Float64, 'linear_z', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = 0.3
+            vitesse.data = 0.1
             self.moveup_publisher.publish(vitesse)
             self.get_logger().info("MoveUp is now active and doing its task.")
         else:
@@ -142,14 +169,14 @@ class MoveUp(AutoOff):
 class MoveDown(AutoOff):
     def __init__(self):
         super().__init__("MoveDown")
-        self.movedown_publisher = self.create_publisher(Float64, 'linear_z', 10)
+        self.movedown_publisher = self.create_publisher(Float64, 'linear_z', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = -0.3
+            vitesse.data = -0.1
             self.movedown_publisher.publish(vitesse)
             self.get_logger().info("MoveDown is now active and doing its task.")
         else:
@@ -160,14 +187,14 @@ class TurnRight(AutoOff):
     def __init__(self):
         super().__init__("TurnRight")
         self.turnright_publisher = self.create_publisher(
-            Float64, 'angular_z', 10)
+            Float64, 'angular_z', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = 0.3
+            vitesse.data = 0.1
             self.turnright_publisher.publish(vitesse)
             self.get_logger().info("TurnRight is now active and doing its task.")
         else:
@@ -177,14 +204,14 @@ class TurnRight(AutoOff):
 class TurnLeft(AutoOff):
     def __init__(self):
         super().__init__("TurnLeft")
-        self.turnleft_publisher = self.create_publisher(Float64, 'angular_z', 10)
+        self.turnleft_publisher = self.create_publisher(Float64, 'angular_z', 100)
 
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
             self.timer.reset()
             vitesse = Float64()
-            vitesse.data = -0.3
+            vitesse.data = -0.1
             self.turnleft_publisher.publish(vitesse)
             self.get_logger().info("TurnLeft is now active and doing its task.")
         else:
@@ -216,6 +243,13 @@ def hover():
     hover.destroy_node()
     rclpy.shutdown()
 
+
+def center():
+    rclpy.init()
+    center = Center()
+    rclpy.spin(center)
+    center.destroy_node()
+    rclpy.shutdown()
 
 def move_forward():
     rclpy.init()

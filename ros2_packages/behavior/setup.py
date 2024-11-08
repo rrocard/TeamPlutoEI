@@ -7,6 +7,7 @@ node_scripts = [
     'land = behavior.behaviors:land',
     'hover = behavior.behaviors:hover',
     'move_forward = behavior.behaviors:move_forward',
+    'center = behavior.behaviors:center',
     'move_backward = behavior.behaviors:move_backward',
     'move_right = behavior.behaviors:move_right',
     'move_left = behavior.behaviors:move_left',

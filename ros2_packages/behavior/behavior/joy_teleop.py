@@ -3,6 +3,7 @@ import rclpy.node
 
 from behavior_interface.msg import Command
 from sensor_msgs.msg import Joy
+from std_msgs.msg import String
 
 
 BUTTON_A = 0
@@ -38,7 +39,8 @@ class Node(rclpy.node.Node):
         )
 
         # Publisher pour le topic command
-        self.command_publisher = self.create_publisher(Command, 'command', 10)
+        self.command_publisher = self.create_publisher(Command, 'command', 100)
+        self.testcommand_publisher = self.create_publisher(String, 'testcommand', 100)
 
         self.get_logger().info("Joystick Teleop Node initialized")
 
@@ -57,7 +59,7 @@ class Node(rclpy.node.Node):
 
     def joy_callback(self, msg):
         command_msg = Command()
-        
+        testcommand_msg = String()
 
         # ATTENTION A DETECTER QUE le bouton n'était pas enfoncé et on l'enfonce
         
@@ -66,6 +68,8 @@ class Node(rclpy.node.Node):
         if msg.buttons[BUTTON_RB] == 1 and not self.deadman_pressed:
                 command_msg.command = "TakeOff"
                 self.command_publisher.publish(command_msg)
+                testcommand_msg.data = "Envoyé"
+                self.testcommand_publisher.publish(testcommand_msg)
                 self.get_logger().info("RB pressed: Takeoff initiated")
                 self.deadman_pressed = True
 
@@ -153,28 +157,46 @@ class Node(rclpy.node.Node):
 
         if msg.axes[AXIS_LEFT_VERTICAL] <= 0.5 and self.forward:
             self.forward = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
                 
         if msg.axes[AXIS_LEFT_VERTICAL] >= -0.5 and self.backward:
             self.backward = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
 
         if msg.axes[AXIS_LEFT_HORIZONTAL] >= -0.5 and self.right:
             self.right = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
         
         if msg.axes[AXIS_LEFT_HORIZONTAL] <= 0.5 and self.left:
             self.left = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
 
         if msg.axes[AXIS_RIGHT_VERTICAL] <= 0.5 and self.up:
             self.up = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
 
         if msg.axes[AXIS_RIGHT_VERTICAL] >= -0.5 and self.down:
             self.down = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
 
         if msg.axes[AXIS_RIGHT_HORIZONTAL] >= -0.5 and self.turnright:
             self.turnright = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
 
         if msg.axes[AXIS_RIGHT_HORIZONTAL] <= 0.5 and self.turnleft:
             self.turnleft = False
+            command_msg.command = "Center"
+            self.command_publisher.publish(command_msg)
+
         
+
 
             # elif msg.axes[AXIS_LEFT_VERTICAL] > 0.5:
             #     command_msg.command = "MoveForward"

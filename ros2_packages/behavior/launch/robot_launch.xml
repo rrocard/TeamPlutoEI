@@ -4,6 +4,7 @@
   <node pkg="behavior" exec="land" name="land" />
   <node pkg="behavior" exec="hover" name="hover" />
   <node pkg="behavior" exec="move_forward" name="move_forward" />
+  <node pkg="behavior" exec="center" name="center" />
   <node pkg="behavior" exec="move_backward" name="move_backward" />
   <node pkg="behavior" exec="move_right" name="move_right" />
   <node pkg="behavior" exec="move_left" name="move_left" />
@@ -13,6 +14,8 @@
   <node pkg="behavior" exec="turn_left" name="turn_left" />
 
   <node pkg="behavior" exec="joy_teleop" name="joy_teleop" />
+  <node pkg="lower_level" exec="speed_controller" name="speed_controller" />
+
   <node pkg="behavior" exec="command" name="command" />
   <node pkg="behavior" exec="status_viewer" name="status_viewer" />
   <node pkg="joy" exec="joy_node" name="joy_node" />

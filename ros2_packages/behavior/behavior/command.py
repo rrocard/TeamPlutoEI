@@ -14,31 +14,32 @@ class Node(rclpy.node.Node):
             Command,
             'command',
             self.command_callback,
-            10
+            100
         )
 
         # liste des behaviors possibles
-        self.behaviors = ['Land', 'TakeOff', 'Hover', 'MoveForward', 'MoveBackward', 'MoveLeft', 'MoveUp', 'MoveRight', 'TurnLeft', 'TurnRight']
+        self.behaviors = ['Land', 'TakeOff', 'Center', 'Hover', 'MoveForward', 'MoveBackward', 'MoveLeft', 'MoveUp', 'MoveRight', 'TurnLeft', 'TurnRight']
         self.commands = {
             'TakeOff' : [(0, 'TakeOff')],
             'Land' : [(0, 'Land')],
             'EmergencyStop' : [(0, 'Hover'), (1, 'Land')],
             'Hover' : [(0, 'Hover')],
-            'Forward' : [(0, 'Hover'), (0.5, 'MoveForward')],
-            'Backward' : [(0, 'Hover'), (0.5, 'MoveBackward')],
-            'Left' : [(0, 'Hover'), (0.5, 'MoveLeft')],
-            'Right' : [(0, 'Hover'), (0.5, 'MoveRight')],
-            'TurnLeft' : [(0, 'Hover'), (0.5, 'TurnLeft')],
-            'TurnRight' : [(0, 'Hover'), (0.5, 'TurnRight')],
-            'Up' : [(0, 'Hover'), (0.5, 'MoveUp')],
-            'Down' : [(0, 'Hover'), (0.5, 'MoveDown')],
+            'Forward' : [(1, 'MoveForward')],
+            'Backward' : [(1, 'MoveBackward')],
+            'Left' : [ (1, 'MoveLeft')],
+            'Right' : [(1, 'MoveRight')],
+            'TurnLeft' : [ (1, 'TurnLeft')],
+            'TurnRight' : [ (1, 'TurnRight')],
+            'Up' : [(1, 'MoveUp')],
+            'Down' : [ (1, 'MoveDown')],
+            'Center' : [(0, 'Center')],
             
             'Wtf' : [(0, 'Hover'), (3, 'TurnLeft'), (3.2, 'MoveLeft')], # il devrait faire des ronds aberrants
             
 
         }
         
-        self.behavior_publisher = self.create_publisher(BehaviorStatus, 'behavior', 10)
+        self.behavior_publisher = self.create_publisher(BehaviorStatus, 'behavior', 100)
 
         # Timer pour check la queue d'evenements
         self.timer = self.create_timer(0.05, self._on_time)
