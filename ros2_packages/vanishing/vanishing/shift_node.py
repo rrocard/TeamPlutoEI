@@ -24,14 +24,14 @@ class ShiftNode(Node):
 
         self.free_space = self.create_publisher(Bool,"free_space",10)
         self.debug_pub = self.create_publisher(
-            CompressedImage, "/debug/vpimg/image_raw/compressed", 1
+            CompressedImage, "/debug/shiftimg/image_raw/compressed", 1
         )
 
 
 
 
         self.img_sub = self.create_subscription(
-    CompressedImage, "/bebop/image_raw/compressed", self.on_image, 1
+    CompressedImage, "/bebop/camera/image_raw/compressed", self.on_image, 1
         )
         self.speed_sub = self.create_subscription(Float32, "/bebop/odom",self.on_speed,1)
         self.bridge = CvBridge()
