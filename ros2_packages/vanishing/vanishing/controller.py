@@ -68,7 +68,8 @@ class Controller(Node):
             ParameterDescriptor(description="The maximal angular velocity"),
         )
         self.define_nbc_nodes()
-        self.cmd_vel_pub = self.create_publisher(Twist, "/bebop/cmd_vel", 1)
+        self.linear_xpub = self.create_publisher(Float64, "linear_x", 1)
+        self.angular_zpub = self.create_publisher(Float64,"linear_y",1)
 
         self.angle_bounds = (-0.75, 0.75)
         self.offset_bounds = (-0.75, 0.75)
@@ -148,15 +149,24 @@ class Controller(Node):
             linear_x, angular_z = self.nbc.compute_command(
                 (self.vp_angle, self.vp_offset)
             )
-            twist = Twist()
-            twist.linear.x = linear_x
-            twist.angular.z = angular_z
-            self.cmd_vel_pub.publish(twist)
+
+            msg=Float64()
+            msg.data=float(linear_x)
+            msg2=Float64()
+            msg2.data=float(angular_z)
+
+            self.linear_xpub.publish(msg)
+            self.angular_zpub.publish(msg2)
+
             print("input cmd/vel",linear_x,angular_z)
 
         
         elif self.vp_offset == 500:
             print("no vp detected")
+            msg=Float64()
+            msg2=Float64()
+            msg.data=float(0)
+            msg2.data=float(0)
 
 
 
