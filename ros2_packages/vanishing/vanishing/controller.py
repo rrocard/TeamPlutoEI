@@ -91,15 +91,23 @@ class Controller(Node):
         self.nbc.clear_nodes()
         # TODO: You can define your nodes here
         # as two tuples (position in S space), (linear vel, angular vel)
-        self.nbc.add_node((0, 0), (0.1, 0.0))
-        self.nbc.add_node((0, 0.25), (0.05, 0.0))
-        self.nbc.add_node((0, -0.25), (0.05, 0.0))
-        self.nbc.add_node((0.5, 0), (0.1, 0.25))
-        self.nbc.add_node((0.5, 0.25), (0.05, 0.25))
-        self.nbc.add_node((0.5, -0.25), (0.05, 0.25))
-        self.nbc.add_node((-0.5, 0), (0.1, -0.25))
-        self.nbc.add_node((-0.5, 0.25), (0.05, -0.25))
-        self.nbc.add_node((-0.5, -0.25), (0.05, -0.25))
+        self.nbc.add_node((0, 0), (0.005, 0.0))
+        #if there is no angular off, but hor off we should still rotate a bit the drone to align
+        self.nbc.add_node((0, 0.25), (0.00125, 0.125))
+        self.nbc.add_node((0, -0.25), (0.00125, -0.125))
+
+        #if there is angular off but no hor off, same as before
+        self.nbc.add_node((0.5, 0), (0.00125, 0.125))
+        # if the angular and horizontal offset are too high, the drone will only rotate on itself 
+        # to find new vanishing point
+        self.nbc.add_node((0.5, 0.25), (0.000, 0.25))
+        self.nbc.add_node((0.5, -0.25), (0, 0.25))
+
+        #angular off but no hor off
+        self.nbc.add_node((-0.5, 0), (0.00125, -0.125))
+
+        self.nbc.add_node((-0.5, 0.25), (0, -0.25))
+        self.nbc.add_node((-0.5, -0.25), (0, -0.25))
 
     c1 = np.array([1, 0])
     c2 = np.array([1, -1])
@@ -135,6 +143,7 @@ class Controller(Node):
             and not math.isinf(self.vp_angle)
             and self.vp_offset is not None
             and not math.isinf(self.vp_offset)
+            and self.vp_offset != 500
         ):
             linear_x, angular_z = self.nbc.compute_command(
                 (self.vp_angle, self.vp_offset)
@@ -143,6 +152,13 @@ class Controller(Node):
             twist.linear.x = linear_x
             twist.angular.z = angular_z
             self.cmd_vel_pub.publish(twist)
+            print("input cmd/vel",linear_x,angular_z)
+
+        
+        elif self.vp_offset == 500:
+            print("no vp detected")
+
+
 
     def draw_velocity(self, ax, velocity, bounds, position, xoffset, fillcolor):
         width = 0.04

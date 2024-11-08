@@ -99,14 +99,14 @@ class VPNode(Node):
         mll.draw_lines(frame, lines, (0, 0, 255), 1)
 
         lines=mll.ceiling_filtering(lines,20) 
-        lines=mll.angle_filtering(lines,85,20)
+        lines=mll.angle_filtering(lines,80,10)
         lines=mll.cluster_filtering(frame,lines)
 
         #On affiche les lines gardées après filtrage
         mll.draw_lines(frame, lines, (50, 255, 255), 1)
 
         ylim=20
-        xlim=80
+        xlim=200
         vanishing_point=mll.vanishing_point(frame,lines,xlim,ylim)
 
         cv2.circle(frame, (int(vanishing_point[0]),int(vanishing_point[1])), 5, (0,0,255),-1)
@@ -118,7 +118,10 @@ class VPNode(Node):
         horizontal_displacement=vanishing_point[0]-width//2
 
         #Remapping from [-width/2,width/2]
-        normalized_horizontal_displacement=horizontal_displacement/width/2
+        if int(vanishing_point[0])==0:
+            normalized_horizontal_displacement=500
+        else :
+           normalized_horizontal_displacement=horizontal_displacement/width/2
 
 
 

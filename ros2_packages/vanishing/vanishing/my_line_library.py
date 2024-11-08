@@ -175,7 +175,8 @@ def vanishing_point(img,segments,xlim=40,ylim=40):
             cv2.circle(img, (int(vanishingpoint[0]),int(vanishingpoint[1])), 8, (0,0,255),-1)
             return vanishingpoint
 
-    return [width//2,height//2] #valeur par défaut du vanishing point
+    # return [width//2,height//2] #valeur par défaut du vanishing point
+    return [0,0]
 
 from sklearn.cluster import DBSCAN
 
