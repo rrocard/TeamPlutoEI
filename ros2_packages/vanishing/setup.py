@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': ['vp = vanishing.vp_node:main','shift = vanishing.shift_node:main',
-        'controller=vanishing.controller:main','speedc = vanishing.speed_controller.py:main'
+        'controller=vanishing.controller:main'
         ],
     },
 )
