@@ -356,30 +356,30 @@ def door(shift,shift_threshold,min_width=600):
     zone_start_indices = np.insert(zone_start_indices,0,0)
     zone_end_indices = np.concatenate((zone_end_indices, [856])) 
 
-    print("zstratind",zone_start_indices)
-    print("zend",zone_end_indices)
+    # print("zstratind",zone_start_indices)
+    # print("zend",zone_end_indices)
 
     for start, end in zip(zone_start_indices, zone_end_indices):
 
         if abs(end - start) < min_width:
-            print("tofilter detected")
-            print(start,end,min_width)
+            # print("tofilter detected")
+            # print(start,end,min_width)
 
             if start > end:
                 start, end = end, start
             
-            print(filtered_below[start:end])
+            # print(filtered_below[start:end])
             filtered_below[start:end] = 0 # Masquer la zone trop petite
-            print(filtered_below[start:end])
+            # print(filtered_below[start:end])
    
 
     # test=shift < shift_threshold
     # test=test.astype(int)
 
-    if np.array_equal(below_treshold,filtered_below):
-        print("nonfiltré")
-    else :
-        print("filtered")
+    # if np.array_equal(below_treshold,filtered_below):
+    #     # print("nonfiltré")
+    # else :
+    #     # print("filtered")
         
 
     return filtered_below

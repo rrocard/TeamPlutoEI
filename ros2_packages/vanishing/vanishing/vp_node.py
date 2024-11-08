@@ -120,6 +120,9 @@ class VPNode(Node):
         msg_horizontal=Float32()
         msg_horizontal.data=float(normalized_horizontal_displacement)
 
+        print("horizdes",horizontal_displacement)
+        print("normhori",normalized_horizontal_displacement)
+
         self.horizontal_displacement.publish(msg_horizontal)
 
         if len(lines)!=2:
