@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="vanishing" exec="vp" name="vp" />
+  <node pkg="vanishing" exec="shift" name="shift"/>
+
+</launch>
+
