@@ -70,7 +70,7 @@ class Controller(Node):
         )
         self.define_nbc_nodes()
         self.linear_xpub = self.create_publisher(Float64, "linear_x", 1)
-        self.angular_zpub = self.create_publisher(Float64,"linear_y",1)
+        self.angular_zpub = self.create_publisher(Float64,"angular_z",1)
 
         self.angle_bounds = (-0.75, 0.75)
         self.offset_bounds = (-0.75, 0.75)
@@ -93,20 +93,20 @@ class Controller(Node):
         self.nbc.clear_nodes()
         # TODO: You can define your nodes here
         # as two tuples (position in S space), (linear vel, angular vel)
-        self.nbc.add_node((0, 0), (0.005, 0.0))
+        self.nbc.add_node((0, 0), (0.01, 0.0))
         #if there is no angular off, but hor off we should still rotate a bit the drone to align
-        self.nbc.add_node((0, 0.25), (0.00125, 0.125))
-        self.nbc.add_node((0, -0.25), (0.00125, -0.125))
+        self.nbc.add_node((0, 0.25), (0.0025, 0.125))
+        self.nbc.add_node((0, -0.25), (0.0025, -0.125))
 
         #if there is angular off but no hor off, same as before
-        self.nbc.add_node((0.5, 0), (0.00125, 0.125))
+        self.nbc.add_node((0.5, 0), (0.0025, 0.125))
         # if the angular and horizontal offset are too high, the drone will only rotate on itself 
         # to find new vanishing point
-        self.nbc.add_node((0.5, 0.25), (0.000, 0.25))
+        self.nbc.add_node((0.5, 0.25), (0, 0.25))
         self.nbc.add_node((0.5, -0.25), (0, 0.25))
 
         #angular off but no hor off
-        self.nbc.add_node((-0.5, 0), (0.00125, -0.125))
+        self.nbc.add_node((-0.5, 0), (0.0025, -0.125))
 
         self.nbc.add_node((-0.5, 0.25), (0, -0.25))
         self.nbc.add_node((-0.5, -0.25), (0, -0.25))
@@ -168,6 +168,8 @@ class Controller(Node):
             msg2=Float64()
             msg.data=float(0)
             msg2.data=float(0)
+
+            print("input cmd/vel",msg,msg2)
 
 
 
