@@ -13,7 +13,7 @@ class SpeedController(Node):
         # Declare parameters for PID
         self.declare_parameter('kp', 1.0)
         self.declare_parameter('ki', 0.1)
-        self.declare_parameter('kd', 0.01)
+        self.declare_parameter('kd', 0.05)
 
         # Create the PID controllers for linear_x and linear_y
         pid_gains = {
