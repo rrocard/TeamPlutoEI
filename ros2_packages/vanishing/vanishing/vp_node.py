@@ -99,7 +99,7 @@ class VPNode(Node):
         mll.draw_lines(frame, lines, (0, 0, 255), 1)
 
         lines=mll.ceiling_filtering(lines,20) 
-        lines=mll.angle_filtering(lines,80,10)
+        lines=mll.angle_filtering(lines,85,20)
         lines=mll.cluster_filtering(frame,lines)
 
         #On affiche les lines gardées après filtrage
