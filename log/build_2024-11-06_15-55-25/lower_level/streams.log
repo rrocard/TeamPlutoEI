@@ -1,0 +1,49 @@
+[1.039s] Invoking command in '/users/student/2022chojnackay/Bureau/EI/teamplutoei/src/lower_level': PYTHONPATH=/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/lower_level build --build-base /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build install --record /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log --single-version-externally-managed install_data
+[1.344s] running egg_info
+[1.346s] creating ../../build/lower_level/lower_level.egg-info
+[1.349s] writing ../../build/lower_level/lower_level.egg-info/PKG-INFO
+[1.358s] writing dependency_links to ../../build/lower_level/lower_level.egg-info/dependency_links.txt
+[1.363s] writing entry points to ../../build/lower_level/lower_level.egg-info/entry_points.txt
+[1.368s] writing requirements to ../../build/lower_level/lower_level.egg-info/requires.txt
+[1.370s] writing top-level names to ../../build/lower_level/lower_level.egg-info/top_level.txt
+[1.376s] writing manifest file '../../build/lower_level/lower_level.egg-info/SOURCES.txt'
+[1.384s] reading manifest file '../../build/lower_level/lower_level.egg-info/SOURCES.txt'
+[1.386s] writing manifest file '../../build/lower_level/lower_level.egg-info/SOURCES.txt'
+[1.389s] running build
+[1.391s] running build_py
+[1.392s] creating /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build
+[1.394s] creating /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib
+[1.394s] creating /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.397s] copying lower_level/pid.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.403s] copying lower_level/speed_controller.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.410s] copying lower_level/__init__.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.415s] copying lower_level/joyteleop.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.421s] copying lower_level/twist2pic.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level
+[1.427s] running install
+[1.428s] running install_lib
+[1.429s] creating /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.432s] copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/pid.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.439s] copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/speed_controller.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.446s] copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/__init__.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.453s] copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/joyteleop.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.459s] copying /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build/lib/lower_level/twist2pic.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level
+[1.469s] byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/pid.py to pid.cpython-310.pyc
+[1.479s] byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/speed_controller.py to speed_controller.cpython-310.pyc
+[1.489s] byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/__init__.py to __init__.cpython-310.pyc
+[1.496s] byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/joyteleop.py to joyteleop.cpython-310.pyc
+[1.504s] byte-compiling /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level/twist2pic.py to twist2pic.cpython-310.pyc
+[1.513s] running install_data
+[1.516s] creating /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/share/ament_index
+[1.517s] creating /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/share/ament_index/resource_index
+[1.518s] creating /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/share/ament_index/resource_index/packages
+[1.521s] copying resource/lower_level -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/share/ament_index/resource_index/packages
+[1.526s] copying package.xml -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/share/lower_level
+[1.533s] copying launch/twist2piclaunch.py -> /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/share/lower_level
+[1.540s] running install_egg_info
+[1.544s] Copying ../../build/lower_level/lower_level.egg-info to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages/lower_level-0.0.0-py3.10.egg-info
+[1.607s] running install_scripts
+[1.631s] Installing joyteleop script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level
+[1.637s] Installing speed_controller script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level
+[1.643s] Installing twist2pic script to /users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/lower_level
+[1.648s] writing list of installed files to '/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log'
+[1.675s] Invoked command in '/users/student/2022chojnackay/Bureau/EI/teamplutoei/src/lower_level' returned '0': PYTHONPATH=/users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/users/student/2022chojnackay/Bureau/EI/teamplutoei/install/lower_level/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/lower_level build --build-base /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/build install --record /users/student/2022chojnackay/Bureau/EI/teamplutoei/build/lower_level/install.log --single-version-externally-managed install_data
