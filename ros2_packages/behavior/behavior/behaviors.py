@@ -63,7 +63,7 @@ class MoveForward(AutoOff):
     def __init__(self):
         super().__init__("MoveForward")
         self.moveforward_publisher = self.create_publisher(Float64, 'linear_x', 100)
-
+        
     def on_status(self, status: bool):
         super().on_status(status)
         if status:
