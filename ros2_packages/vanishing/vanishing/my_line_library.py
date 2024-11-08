@@ -345,31 +345,16 @@ def door(shift,shift_threshold,min_width=600):
 
     filtered_below=below_treshold.copy()
 
-    transitions=np.diff(below_treshold)
+    ones=find_consecutive_ones(below_treshold)
 
-    transitions = np.concatenate(([0], transitions, [0]))   
-
-    zone_start_indices=np.where(transitions==1)[0]
-    zone_end_indices=np.where(transitions==-1)[0]
-    
-    #if on commence en up
-    zone_start_indices = np.insert(zone_start_indices,0,0)
-    zone_end_indices = np.concatenate((zone_end_indices, [856])) 
-
-    # print("zstratind",zone_start_indices)
-    # print("zend",zone_end_indices)
-
-    for start, end in zip(zone_start_indices, zone_end_indices):
+    for start,end in ones:
 
         if abs(end - start) < min_width:
             # print("tofilter detected")
             # print(start,end,min_width)
-
-            if start > end:
-                start, end = end, start
             
             # print(filtered_below[start:end])
-            filtered_below[start:end] = 0 # Masquer la zone trop petite
+            filtered_below[max(0,start-1):min(856,end+1)] = 0 # Masquer la zone trop petite
             # print(filtered_below[start:end])
    
 
@@ -383,3 +368,23 @@ def door(shift,shift_threshold,min_width=600):
         
 
     return filtered_below
+
+def find_consecutive_ones(arr):
+    result = []  # Liste pour stocker les indices des sous-tableaux de 1 consécutifs
+    start_index = None  # Variable pour suivre le début de chaque séquence de 1
+
+    # On parcourt chaque élément du tableau
+    for i, val in enumerate(arr):
+        if val == 1:
+            if start_index is None:  # On marque le début de la séquence de 1
+                start_index = i
+        else:
+            if start_index is not None:  # Si on rencontre un 0 après des 1 consécutifs
+                result.append((start_index, i - 1))  # Ajouter la séquence trouvée
+                start_index = None  # Réinitialiser pour le prochain bloc de 1
+
+    # Si la séquence de 1 se termine à la fin du tableau
+    if start_index is not None:
+        result.append((start_index, len(arr) - 1))
+
+    return result
