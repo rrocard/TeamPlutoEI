@@ -1,5 +1,0 @@
-[console_scripts]
-joyteleop = lower_level.joyteleop:main
-speed_controller = lower_level.speed_controller:main
-twist2pic = lower_level.twist2pic:main
-
