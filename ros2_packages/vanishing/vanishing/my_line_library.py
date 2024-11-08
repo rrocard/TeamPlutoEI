@@ -126,10 +126,16 @@ def intersections(segments):
                                       coeff * np.cross(sj[[4, 6]], si[[4, 6]])]) # -[a1, c1] ^ [a2, c2]
     return np.array(intersections)
 
-def vanishing_point(img,segments,xlim=40,ylim=120):
+def vanishing_point(img,segments,xlim=40,ylim=40):
 
     width=img.shape[1]
     height=img.shape[0]
+
+    cv2.line(img, (img.shape[1]-xlim,ylim), (img.shape[1]-xlim, img.shape[0]-ylim), (255, 255,0 ), 1)
+    cv2.line(img, (xlim, ylim), (xlim, img.shape[0]-ylim), (255, 255,0 ), 1)
+
+    cv2.line(img, (xlim,ylim), (img.shape[1]-xlim, ylim), (255, 255,0 ), 1)
+    cv2.line(img, (xlim, img.shape[0]-ylim), (img.shape[1]-xlim, img.shape[0]-ylim), (255, 255,0 ), 1)
 
     intersect=intersections(segments)
     
@@ -169,7 +175,8 @@ def vanishing_point(img,segments,xlim=40,ylim=120):
             cv2.circle(img, (int(vanishingpoint[0]),int(vanishingpoint[1])), 8, (0,0,255),-1)
             return vanishingpoint
 
-    return [width//2,height//2] #valeur par défaut du vanishing point
+    # return [width//2,height//2] #valeur par défaut du vanishing point
+    return [0,0]
 
 from sklearn.cluster import DBSCAN
 
@@ -345,41 +352,46 @@ def door(shift,shift_threshold,min_width=600):
 
     filtered_below=below_treshold.copy()
 
-    transitions=np.diff(below_treshold)
+    ones=find_consecutive_ones(below_treshold)
 
-    transitions = np.concatenate(([0], transitions, [0]))   
-
-    zone_start_indices=np.where(transitions==1)[0]
-    zone_end_indices=np.where(transitions==-1)[0]
-    
-    #if on commence en up
-    zone_start_indices = np.insert(zone_start_indices,0,0)
-    zone_end_indices = np.concatenate((zone_end_indices, [856])) 
-
-    print("zstratind",zone_start_indices)
-    print("zend",zone_end_indices)
-
-    for start, end in zip(zone_start_indices, zone_end_indices):
+    for start,end in ones:
 
         if abs(end - start) < min_width:
-            print("tofilter detected")
-            print(start,end,min_width)
-
-            if start > end:
-                start, end = end, start
+            # print("tofilter detected")
+            # print(start,end,min_width)
             
-            print(filtered_below[start:end])
-            filtered_below[start:end] = 0 # Masquer la zone trop petite
-            print(filtered_below[start:end])
+            # print(filtered_below[start:end])
+            filtered_below[max(0,start-1):min(856,end+1)] = 0 # Masquer la zone trop petite
+            # print(filtered_below[start:end])
    
 
     # test=shift < shift_threshold
     # test=test.astype(int)
 
-    if np.array_equal(below_treshold,filtered_below):
-        print("nonfiltré")
-    else :
-        print("filtered")
+    # if np.array_equal(below_treshold,filtered_below):
+    #     # print("nonfiltré")
+    # else :
+    #     # print("filtered")
         
 
     return filtered_below
+
+def find_consecutive_ones(arr):
+    result = []  # Liste pour stocker les indices des sous-tableaux de 1 consécutifs
+    start_index = None  # Variable pour suivre le début de chaque séquence de 1
+
+    # On parcourt chaque élément du tableau
+    for i, val in enumerate(arr):
+        if val == 1:
+            if start_index is None:  # On marque le début de la séquence de 1
+                start_index = i
+        else:
+            if start_index is not None:  # Si on rencontre un 0 après des 1 consécutifs
+                result.append((start_index, i - 1))  # Ajouter la séquence trouvée
+                start_index = None  # Réinitialiser pour le prochain bloc de 1
+
+    # Si la séquence de 1 se termine à la fin du tableau
+    if start_index is not None:
+        result.append((start_index, len(arr) - 1))
+
+    return result
