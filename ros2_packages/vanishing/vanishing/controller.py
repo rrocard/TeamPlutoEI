@@ -10,6 +10,7 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image, CompressedImage
 from geometry_msgs.msg import Twist
 import numpy as np
+from std_msgs.msg import Float64
 import math
 
 import matplotlib
